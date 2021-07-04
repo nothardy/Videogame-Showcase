@@ -11,8 +11,9 @@ const Game = db.define("game", {
   name: { type: STRING, allowNull: false },
   description: { type: TEXT, allowNull: false },
   release_date: { type: STRING, allowNull: false },
+  background_img: { type: STRING(500) },
   rating: { type: STRING, allowNull: false },
-  platform: { type: STRING, allowNull: false },
+  platforms: { type: STRING, allowNull: false },
 });
 
 const Genre = db.define("genre", {

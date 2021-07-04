@@ -4,6 +4,7 @@ const { Game, Genre } = require("../models");
 require("dotenv").config();
 const { API_KEY } = process.env;
 const axios = require("axios");
+const { filterGameDetails } = require("../models/filters");
 
 router.route("/").get(async (req, res, next) => {
   if (req.url.includes("?name")) {
@@ -17,22 +18,9 @@ router.route("/").get(async (req, res, next) => {
           .status(400)
           .json({ error: "Game not found. Please enter a valid name" });
       let dbGames = await Game.findAll();
-
-      apiGames = apiGames.data.results.map((game) => {
-        return (game = {
-          id: game.id,
-          name: game.name,
-          release_date: game.released,
-          rating: game.rating,
-          backgroundImg: game.background_image,
-          platforms: game.parent_platforms.map((platform) => {
-            return platform.platform.name;
-          }),
-        });
-      });
+      apiGames = filterGameDetails(apiGames);
       apiGames.length = 15;
       const games = apiGames.concat(dbGames);
-
       res.json(games);
     } catch (error) {
       next(error);
@@ -43,27 +31,13 @@ router.route("/").get(async (req, res, next) => {
         `https://api.rawg.io/api/games?key=${API_KEY}`
       );
       let dbGames = await Game.findAll();
-
-      apiGames = apiGames.data.results.map((game) => {
-        return (game = {
-          id: game.id,
-          name: game.name,
-          release_date: game.released,
-          rating: game.rating,
-          backgroundImg: game.background_image,
-          platforms: game.parent_platforms.map((platform) => {
-            return platform.platform.name;
-          }),
-        });
-      });
+      apiGames = filterGameDetails(apiGames);
       apiGames.length = 15;
       const games = apiGames.concat(dbGames);
-
       res.json(games);
     } catch (error) {
       next(error);
     }
   }
 });
-// YA CONSEGUI LA INFO, AHORA FALTA ORDENARLA/FILTRARLA Y HACER LAS DEMAS RUTAS
 module.exports = router;
