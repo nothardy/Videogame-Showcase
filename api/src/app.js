@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 
 const morgan = require("morgan");
 const videogamesRoute = require("./routes/videogames");
-const videogameRoute = require("./routes/videogame");
+//const videogameRoute = require("./routes/videogame");
 const genresRoute = require("./routes/genres");
 const cors = require("cors");
 
@@ -16,8 +16,8 @@ server.use(express.json());
 server.use(cookieParser());
 server.use(morgan("dev"));
 
+//server.use("/videogame", videogameRoute);
 server.use("/videogames", videogamesRoute);
-server.use("/videogame", videogameRoute);
 server.use("/genres", genresRoute);
 
 // Error catching endware.

@@ -1,0 +1,199 @@
+const { default: axios } = require("axios");
+const {
+  filterGameDetails,
+  specificGameDetails,
+  filterGenres,
+} = require("./filters");
+require("dotenv").config();
+require("uuid");
+const { API_KEY } = process.env;
+const { Game, Genre } = require("../models");
+const { v4: uuidv4 } = require("uuid");
+const { Op } = require("sequelize");
+
+const getApiGames = async (req, res, next) => {
+  if (req.url.includes("?name")) {
+    const gameName = req.query.name;
+    try {
+      let apiGames = await axios.get(
+        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}`
+      );
+      if (!apiGames.data.results[0])
+        return res
+          .status(400)
+          .json({ error: "Game not found. Please enter a valid name" });
+      //let dbGames = await Game.findAll();
+
+      apiGames = filterGameDetails(apiGames);
+      apiGames.length = 15;
+      const games = apiGames;
+      //.concat(dbGames);
+      res.json(games);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    try {
+      let apiGames = await axios.get(
+        `https://api.rawg.io/api/games?key=${API_KEY}`
+      );
+      //let dbGames = await Game.findAll();
+      apiGames = filterGameDetails(apiGames);
+      apiGames.length = 15;
+      const games = apiGames;
+      //.concat(dbGames);
+      res.json(games);
+    } catch (error) {
+      next(error);
+    }
+  }
+};
+
+const postGameIntoDb = async (req, res, next) => {
+  try {
+    const {
+      name,
+      description,
+      release_date,
+      rating,
+      background_img,
+      platforms,
+      genres,
+    } = req.body;
+    const game = await Game.create({
+      id: uuidv4(),
+      name,
+      description,
+      release_date,
+      rating,
+      background_img,
+      platforms,
+    });
+    genres.forEach(async (genre) => {
+      let genreThatMatchesDb = await Genre.findOne({
+        where: {
+          name: genre,
+        },
+      });
+      game.addGenre(genreThatMatchesDb);
+    });
+    res.json({ msg: "Game Succesfully created" });
+  } catch (error) {
+    next(error);
+    //res.status(400).json(error || { error: "Please enter valid parameters" });
+  }
+};
+const getGameById = async (req, res, next) => {
+  if (req.params.hasOwnProperty("gameId")) {
+    const gameId = req.params.gameId;
+    if (gameId.length > 9) {
+      // los uuid son largos jeje
+      Game.findByPk(gameId, {
+        include: [{ model: Genre, as: "genres", attributes: ["id", "name"] }], // me traigo solo algunos atrib
+      })
+        .then((game) => (game ? res.json(game) : res.sendStatus(404)))
+        .catch((error) => next(error));
+    } else {
+      try {
+        let apiGame = await axios.get(
+          `https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`
+        );
+        if (apiGame.data.detail === "Not found.")
+          return res
+            .status(404)
+            .json({ error: "Game not found. Please enter a valid name" });
+        const gameDetails = specificGameDetails(apiGame);
+        res.json(gameDetails);
+      } catch (error) {
+        return res
+          .status(404)
+          .json({ error: "Game not found. Please enter a valid name" });
+      }
+    }
+  }
+};
+
+const getGameByName = async (req, res, next) => {
+  if (req.url.includes("?name")) {
+    const gameName = req.query.name;
+    try {
+      const dbGames = await Game.findAll({
+        include: [
+          {
+            model: Genre,
+            as: "genres",
+            attributes: ["id", "name"],
+          },
+        ],
+        where: { name: { [Op.iLike]: `%${gameName}%` } }, // op.ilike mimics LIKE sentence in SQL :D
+      });
+      let apiGames = await axios.get(
+        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}&page_size=100`
+      );
+      if (!apiGames.data.results[0])
+        return res
+          .status(400)
+          .json({ error: "Game not found. Please enter a valid name" });
+      //let dbGames = await Game.findAll();
+      apiGames = filterGameDetails(apiGames);
+      let combinedGames = dbGames.concat(apiGames);
+      combinedGames.length = 15;
+      res.json(combinedGames);
+      //const games = apiGames;
+      //.concat(dbGames);
+      //res.json(games);
+    } catch (error) {
+      next(error);
+    }
+  }
+};
+
+const getDbGames = async (req, res, next) => {
+  try {
+    const dbGames = await Games.findAll({
+      include: [
+        {
+          model: Genre,
+          as: "genres",
+        },
+      ],
+    });
+    if (dbGames.length > 0) return res.json(dbGames);
+    return res.json({ msg: "Game database is empty" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getGenres = async (_req, res, next) => {
+  let genreTable = await Genre.findAll();
+  if (genreTable.length !== 19) {
+    try {
+      let apiGenres = await axios.get(
+        `https://api.rawg.io/api/genres?key=${API_KEY}`
+      );
+      const genres = filterGenres(apiGenres);
+      genres.forEach(async (genre) => {
+        await Genre.findOrCreate({
+          where: {
+            name: genre.name,
+          },
+        });
+      });
+      return res.json({
+        msg: "Genre table succesfully created. Genres were imported from API and from now on will be reached from db",
+      });
+    } catch (error) {
+      next(error);
+    }
+  } else return res.json(genreTable);
+};
+
+module.exports = {
+  getApiGames,
+  getGameByName,
+  getDbGames,
+  postGameIntoDb,
+  getGameById,
+  getGenres,
+};
