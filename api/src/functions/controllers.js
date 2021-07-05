@@ -11,6 +11,58 @@ const { Game, Genre } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 const { Op } = require("sequelize");
 
+//OTRA MANERA DE TRAERME ABSOLUTAMENTE TODOS LOS JUEGOS
+const getAbsolutelyAllGames = async () => {
+  let allGames = [];
+  let showGames = [];
+  const getApiGames = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}`
+  );
+  const dataPage1 = getApiGames.data;
+  allGames = [...allGames, ...dataPage1.results];
+  let pages = dataPage1;
+  let i = 0;
+  // fetcheo cada pagina de resultados, hago hasta 6 pero podrian ser infinitos.
+  while (i < 6 && !pages.next.endsWith(6)) {
+    let getMoreApiGames = await axios.get(pages.next);
+    allGames = [...allGames, ...getMoreApiGames.data.results];
+    pages = getMoreApiGames.data;
+    i++;
+  }
+  allGames.forEach((game) => {
+    const fetchedGame = {
+      id: game.id,
+      name: game.name,
+      release_date: game.released,
+      rating: game.rating,
+      background_img: game.background_image,
+      genres: game.genres.map((genre) => {
+        return {
+          id: genre.id,
+          name: genre.name,
+        };
+      }),
+      platforms: game.parent_platforms.map((platform) => {
+        return platform.platform.name;
+      }),
+    };
+    showGames = [...showGames, fetchedGame];
+  });
+  const dbGames = await Game.findAll({
+    include: [
+      {
+        model: Genre,
+        attributes: ["id", "name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
+  const absolutelyAllGames = [...dbGames, ...showGames];
+  return absolutelyAllGames;
+};
+
 const getApiGames = async (req, res, next) => {
   if (req.url.includes("?name")) {
     const gameName = req.query.name;
@@ -128,7 +180,7 @@ const getGameByName = async (req, res, next) => {
         where: { name: { [Op.iLike]: `%${gameName}%` } }, // op.ilike mimics LIKE sentence in SQL :D
       });
       let apiGames = await axios.get(
-        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}&page_size=100`
+        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}`
       );
       if (!apiGames.data.results[0])
         return res
