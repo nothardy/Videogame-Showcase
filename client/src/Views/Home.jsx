@@ -1,15 +1,21 @@
 import React from "react";
 import styles from "./Home.module.css";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <>
       <div className="bigContainer">
         <div className="startButton">
-          <button>Get Started</button>
+          <Link to="/catalog">
+            <button>Get Started</button>
+          </Link>
         </div>
         <div className="witcherImg">
-          <img src={"#"} alt="" />
+          <img
+            src={"https://images8.alphacoders.com/542/thumb-1920-542508.jpg"}
+            alt=""
+          />
         </div>
       </div>
     </>

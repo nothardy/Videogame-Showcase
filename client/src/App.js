@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Route } from "react-router";
 import "./App.css";
 import Home from "./Views/Home";
+import GameCatalog from "./Views/GameCatalog";
 import Nav from "./Components/Nav";
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
       <Nav />
       <Route path="/" exact>
         <Home />
+      </Route>
+      <Route path="/catalog" exact>
+        <GameCatalog />
       </Route>
     </>
   );
