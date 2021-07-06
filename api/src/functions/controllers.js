@@ -63,6 +63,22 @@ const getAbsolutelyAllGames = async () => {
   return absolutelyAllGames;
 };
 
+const getDynamicResultPages = async (url = "url") => {
+  try {
+    let currentPage = await axios.get(url);
+
+    //let dbGames = await Game.findAll();
+    const nextPage = currentPage.next;
+    let apiGames = filterGameDetails(currentPage);
+    apiGames.length = 15;
+    const games = apiGames;
+    //.concat(dbGames);
+    res.json(games, nextPage);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getApiGames = async (req, res, next) => {
   if (req.url.includes("?name")) {
     const gameName = req.query.name;
