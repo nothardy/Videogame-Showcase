@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./Views/Home";
 import GameCatalog from "./Views/GameCatalog";
 import Nav from "./Components/Nav";
+import PostGame from "./Views/PostGame";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Route>
       <Route path="/catalog" exact>
         <GameCatalog />
+      </Route>
+      <Route path="/postgame" exact>
+        <PostGame />
       </Route>
     </>
   );

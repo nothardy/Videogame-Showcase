@@ -9,3 +9,5 @@ export function getGames() {
     });
   };
 }
+
+export function postGame(game) {}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGames } from "../Redux/actions";
+import { Link } from "react-router-dom";
 
 export function GameCatalog() {
   const games = useSelector((state) => state.games);
@@ -12,15 +13,9 @@ export function GameCatalog() {
   return (
     <>
       <h3>Games</h3>
-      <ul>
-        {games.map((game) => (
-          <React.Fragment key={game.page}>
-            <a href={"#"}>
-              <h3>{game.name}</h3>
-            </a>
-          </React.Fragment>
-        ))}
-      </ul>
+      <Link to="/postgame">
+        <button className="postGame">Add your own Game!</button>
+      </Link>
     </>
   );
 }
