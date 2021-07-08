@@ -3,6 +3,9 @@ const {
   filterGameDetails,
   specificGameDetails,
   filterGenres,
+  filterGameDetails2,
+  get100Games,
+  getDbGames,
 } = require("./filters");
 require("dotenv").config();
 require("uuid");
@@ -23,7 +26,8 @@ const getAbsolutelyAllGames = async () => {
   let pages = dataPage1;
   let i = 0;
   // fetcheo cada pagina de resultados, hago hasta 6 pero podrian ser infinitos.
-  while (i < 6 && !pages.next.endsWith(6)) {
+  while (i < 6) {
+    // && !pages.next.endsWith(6)
     let getMoreApiGames = await axios.get(pages.next);
     allGames = [...allGames, ...getMoreApiGames.data.results];
     pages = getMoreApiGames.data;
@@ -52,6 +56,7 @@ const getAbsolutelyAllGames = async () => {
     include: [
       {
         model: Genre,
+        as: "genres",
         attributes: ["id", "name"],
         through: {
           attributes: [],
@@ -79,7 +84,39 @@ const getDynamicResultPages = async (url = "url") => {
   }
 };
 
-const getApiGames = async (req, res, next) => {
+const getAllGames = async (req, res, next) => {
+  if (req.url.includes("?name")) {
+    const gameName = req.query.name;
+    try {
+      let apiGames = await axios.get(
+        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}`
+      );
+      if (!apiGames.data.results[0])
+        return res
+          .status(400)
+          .json({ error: "Game not found. Please enter a valid name" });
+      let dbGames = await getDbGames();
+      let allGames = get100Games(apiGames).concat(dbGames);
+      res.json(allGames);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    try {
+      let apiGames = await axios.get(
+        `https://api.rawg.io/api/games?key=${API_KEY}`
+      );
+      let dbGames = await getDbGames();
+      let allGames = await get100Games(apiGames);
+      allGames = allGames.concat(dbGames);
+      res.json(allGames);
+    } catch (error) {
+      next(error);
+    }
+  }
+};
+
+const getApiGamesDeprecated = async (req, res, next) => {
   if (req.url.includes("?name")) {
     const gameName = req.query.name;
     try {
@@ -93,7 +130,7 @@ const getApiGames = async (req, res, next) => {
       //let dbGames = await Game.findAll();
 
       apiGames = filterGameDetails(apiGames);
-      apiGames.length = 15;
+      //apiGames.length = 15;
       const games = apiGames;
       //.concat(dbGames);
       res.json(games);
@@ -107,7 +144,7 @@ const getApiGames = async (req, res, next) => {
       );
       //let dbGames = await Game.findAll();
       apiGames = filterGameDetails(apiGames);
-      apiGames.length = 15;
+      //apiGames.length = 15;
       const games = apiGames;
       //.concat(dbGames);
       res.json(games);
@@ -216,23 +253,6 @@ const getGameByName = async (req, res, next) => {
   }
 };
 
-const getDbGames = async (req, res, next) => {
-  try {
-    const dbGames = await Games.findAll({
-      include: [
-        {
-          model: Genre,
-          as: "genres",
-        },
-      ],
-    });
-    if (dbGames.length > 0) return res.json(dbGames);
-    return res.json({ msg: "Game database is empty" });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const getGenres = async (_req, res, next) => {
   let genreTable = await Genre.findAll();
   if (genreTable.length !== 19) {
@@ -258,9 +278,9 @@ const getGenres = async (_req, res, next) => {
 };
 
 module.exports = {
-  getApiGames,
+  getAbsolutelyAllGames,
+  getAllGames,
   getGameByName,
-  getDbGames,
   postGameIntoDb,
   getGameById,
   getGenres,

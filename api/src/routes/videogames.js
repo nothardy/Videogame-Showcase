@@ -2,17 +2,19 @@ const express = require("express");
 const router = express.Router();
 const {
   getApiGames,
-  getDbGames,
   getGameByName,
   postGameIntoDb,
   getGameById,
+  getAllGames,
 } = require("../functions/controllers");
+const { getDbGames } = require("../functions/filters");
 
 router.route("/").get(getGameByName).post(postGameIntoDb);
 
 router.route("/searchId/:gameId").get(getGameById);
 
-router.route("/apigames").get(getApiGames); // if query exists, brings first results matching query name
+// if query exists, brings first results matching query name
+router.route("/apigames").get(getAllGames);
 
 router.route("/dbgames").get(getDbGames);
 

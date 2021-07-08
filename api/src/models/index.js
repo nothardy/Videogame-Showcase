@@ -2,7 +2,8 @@ var Sequelize = require("sequelize");
 require("dotenv").config();
 const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env;
 var db = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+  `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+  { logging: false, native: false }
 );
 const { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT } = Sequelize.DataTypes;
 
