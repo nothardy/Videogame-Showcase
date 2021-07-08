@@ -1,7 +1,8 @@
-import { GET_GAMES } from "./actions";
+import { GET_GAMES, POST_GAME, SEARCH_GAME_BY_NAME } from "./actions";
 
-const initialState = {
+let initialState = {
   games: [],
+  gamesByName: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         games: action.payload,
+      };
+    case POST_GAME:
+      return {
+        ...state,
+        games: [...state.games, action.payload],
+      };
+    case SEARCH_GAME_BY_NAME:
+      return {
+        ...state,
+        gamesByName: action.payload,
       };
     default:
       return state;

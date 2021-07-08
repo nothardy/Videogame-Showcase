@@ -20,13 +20,13 @@ function PostGame() {
   const handleOnChange = (e) => {
     setGame({
       ...game,
-      [e.target.name]: e.taret.value,
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    dispatch(postGame(game));
+    await dispatch(postGame(game));
     setGame(GAME_TEMPLATE);
   };
 

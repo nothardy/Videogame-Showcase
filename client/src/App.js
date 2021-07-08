@@ -5,7 +5,7 @@ import { Route } from "react-router";
 import "./App.css";
 import Home from "./Views/Home";
 import GameCatalog from "./Views/GameCatalog";
-import Nav from "./Components/Nav";
+import Nav from "./Components/Nav/Nav";
 import PostGame from "./Views/PostGame";
 
 function App() {
