@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const { Game, Genre } = require("../models/index");
+const { Op } = require("sequelize");
 
 const filterGameDetailsDeprecated = (fetchedApiObject) => {
   return (fetchedApiObject = fetchedApiObject.data.results.map((game) => {
@@ -64,7 +65,25 @@ const filterGenres = (fetchedApiObject) => {
   });
 };
 
-const getDbGames = async () => {
+const getDbGames = async (gameName) => {
+  if (gameName) {
+    const dbGames = await Game.findAll({
+      where: {
+        name: { [Op.iLike]: `%${gameName}%` },
+      },
+      include: [
+        {
+          model: Genre,
+          as: "genres",
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    if (dbGames.length > 0) return dbGames;
+  }
   const dbGames = await Game.findAll({
     include: [
       {
@@ -81,13 +100,13 @@ const getDbGames = async () => {
   return { msg: "Game database is empty" };
 };
 
-const get100Games = async (api) => {
+const get100Games = async (api, manyGames = false) => {
   const dataPage1 = api.data;
   let allGames = dataPage1.results;
   let pages = dataPage1;
   let i = 0;
   // fetcheo cada pagina de resultados, hago hasta 6 (( 100 juegos)) pero podrian ser infinitos.
-  while (i < 6 && !pages.next.endsWith(6)) {
+  while (i < 6 && !pages.next.endsWith(6) && manyGames == false) {
     // && !pages.next.endsWith(6)
     let getMoreFromApi = await axios.get(pages.next);
 

@@ -9,12 +9,11 @@ const {
 } = require("../functions/controllers");
 const { getDbGames } = require("../functions/filters");
 
-router.route("/").get(getGameByName).post(postGameIntoDb);
+router.route("/").get(getAllGames).post(postGameIntoDb);
 
-router.route("/searchId/:gameId").get(getGameById);
+router.route("/searchById/:gameId").get(getGameById);
 
 // if query exists, brings first results matching query name
-router.route("/apigames").get(getAllGames);
 
 router.route("/dbgames").get(getDbGames);
 

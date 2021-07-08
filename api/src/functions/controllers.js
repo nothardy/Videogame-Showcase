@@ -95,8 +95,9 @@ const getAllGames = async (req, res, next) => {
         return res
           .status(400)
           .json({ error: "Game not found. Please enter a valid name" });
-      let dbGames = await getDbGames();
-      let allGames = get100Games(apiGames).concat(dbGames);
+      let dbGames = await getDbGames(gameName);
+      let allGames = await get100Games(apiGames, true);
+      allGames = allGames.concat(dbGames);
       res.json(allGames);
     } catch (error) {
       next(error);
