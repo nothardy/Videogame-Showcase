@@ -181,9 +181,9 @@ const postGameIntoDb = async (req, res, next) => {
           name: genre,
         },
       });
-      game.addGenre(genreThatMatchesDb);
+      await game.addGenre(genreThatMatchesDb);
     });
-    res.json({ msg: "Game Succesfully created" });
+    res.json({ msg: "Game Succesfully created", gameCreated: game });
   } catch (error) {
     next(error);
     //res.status(400).json(error || { error: "Please enter valid parameters" });
