@@ -13,7 +13,7 @@ const Game = db.define("game", {
   description: { type: TEXT, allowNull: false },
   release_date: { type: STRING, allowNull: false }, // CAMBIAR DESPUES A DATEONLY
   background_img: { type: TEXT },
-  rating: { type: INTEGER, allowNull: false },
+  rating: { type: STRING, allowNull: false },
   platforms: { type: ARRAY(TEXT), allowNull: false },
 });
 

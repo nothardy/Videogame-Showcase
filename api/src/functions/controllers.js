@@ -166,6 +166,7 @@ const postGameIntoDb = async (req, res, next) => {
       platforms,
       genres,
     } = req.body;
+    console.log(name, platforms);
     const game = await Game.create({
       id: uuidv4(),
       name,
@@ -271,11 +272,12 @@ const getGenres = async (_req, res, next) => {
       });
       return res.json({
         msg: "Genre table succesfully created. Genres were imported from API and from now on will be reached from db",
+        genres: genres,
       });
     } catch (error) {
       next(error);
     }
-  } else return res.json(genreTable);
+  } else return res.json({ genres: genreTable });
 };
 
 module.exports = {
