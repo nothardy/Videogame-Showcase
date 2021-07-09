@@ -1,8 +1,14 @@
-import { GET_GAMES, POST_GAME, SEARCH_GAME_BY_NAME } from "./actions";
+import {
+  GET_GAMES,
+  GET_GENRES,
+  POST_GAME,
+  SEARCH_GAME_BY_NAME,
+} from "./actions";
 
 let initialState = {
   games: [],
   gamesByName: [],
+  genres: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +27,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         gamesByName: action.payload,
+      };
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
       };
     default:
       return state;

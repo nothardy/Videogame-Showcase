@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
-import { getGames } from "../Redux/actions";
+import { getGames, getGenres } from "../Redux/actions";
 import { useDispatch } from "react-redux";
 
 function Home() {
   const dispatch = useDispatch();
 
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     dispatch(getGames());
+    dispatch(getGenres());
   };
 
   return (
