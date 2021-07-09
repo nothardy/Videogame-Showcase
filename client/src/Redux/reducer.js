@@ -2,6 +2,7 @@ import {
   GET_GAMES,
   GET_GENRES,
   POST_GAME,
+  REMOVE_SEARCHED_GAMES_BY_NAME,
   SEARCH_GAME_BY_NAME,
 } from "./actions";
 
@@ -32,6 +33,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+
+    case REMOVE_SEARCHED_GAMES_BY_NAME:
+      return {
+        ...state,
+        gamesByName: [],
       };
     default:
       return state;

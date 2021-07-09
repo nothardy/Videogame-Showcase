@@ -1,0 +1,17 @@
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: solid darkblue 2px;
+  background-color: rgb(227, 227, 241);
+  color: rgb(90, 34, 34);
+}
+
+.navContainer h1 {
+  justify-self: flex-start;
+}
+
+.henry img {
+  height: 5rem;
+  width: 30em;
+}

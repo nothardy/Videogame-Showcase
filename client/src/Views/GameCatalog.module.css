@@ -7,4 +7,9 @@
   padding: 10px;
   border: 1px solid white;
   cursor: pointer;
+  background-color: blanchedalmond;
+}
+
+.title {
+  color: blanchedalmond;
 }

@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { getGames, getGenres } from "../Redux/actions";
 import { useDispatch } from "react-redux";
 
 function Home() {
+  const [getData, setGetData] = useState({
+    dataAlreadyFetched: false,
+    buttonTitle: "Get Started",
+  });
   const dispatch = useDispatch();
 
   const handleOnClick = async () => {
-    dispatch(getGames());
-    dispatch(getGenres());
+    if (getData.dataAlreadyFetched === false) {
+      dispatch(getGames());
+      dispatch(getGenres());
+      setGetData({
+        ...getData,
+        dataAlreadyFetched: true,
+      });
+    }
   };
 
   return (
     <>
-      <div className="bigContainer">
+      <div className={`${styles.bigContainer}`}>
         <div className="startButton">
           <Link to="/catalog">
-            <button onClick={handleOnClick}>Get Started</button>
+            <button onClick={handleOnClick}>{getData.buttonTitle}</button>
           </Link>
-        </div>
-        <div className="witcherImg">
-          <img
-            src={"https://images8.alphacoders.com/542/thumb-1920-542508.jpg"}
-            alt=""
-          />
         </div>
       </div>
     </>
@@ -46,4 +50,12 @@ export default Home;
         </div>
         <hr />
       </div>
+
+
+      <div className="witcherImg">
+          <img
+            src={"https://images8.alphacoders.com/542/thumb-1920-542508.jpg"}
+            alt=""
+          />
+        </div>
 */

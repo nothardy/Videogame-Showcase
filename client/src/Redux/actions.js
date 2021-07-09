@@ -4,6 +4,7 @@ export const GET_GAMES = "GET_GAMES";
 export const POST_GAME = "POST_GAME";
 export const SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME";
 export const GET_GENRES = "GET_GENRES";
+export const REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME";
 
 export function getGames() {
   return (dispatch) => {
@@ -42,5 +43,11 @@ export function getGenres() {
     axios.get("http://localhost:3001/genres").then((response) => {
       dispatch({ type: GET_GENRES, payload: response.data.genres });
     });
+  };
+}
+
+export function removeSearchedGamesByName() {
+  return (dispatch) => {
+    dispatch({ type: REMOVE_SEARCHED_GAMES_BY_NAME });
   };
 }

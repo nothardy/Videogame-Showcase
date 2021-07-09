@@ -28,7 +28,7 @@ function Game(props) {
               <p>Genres:{props.game.genres}</p>
             </div>
             <div>
-              <p>Platforms:{props.game.platforms}</p>
+              <p>Rating:{props.game.rating}</p>
             </div>
           </div>
         </div>

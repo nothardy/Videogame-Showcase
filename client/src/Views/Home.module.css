@@ -8,25 +8,22 @@
   flex-direction: row;
   justify-content: space-between;
   opacity: 90%;
- 
 }
- h2{
+h2 {
   position: absolute;
-  top:2%;
+  top: 2%;
   left: 41%;
 }
 /* .rowRight {
   display: flex;
 } */
- .row img {
+.row img {
   position: absolute;
   top: 0px;
   left: 0px;
   height: 7%;
-  width:16%;
-
-  
-} 
+  width: 16%;
+}
 
 .row div {
   display: flex;
@@ -36,6 +33,3 @@
   top: 2%;
   right: 0px;  */
 }
-
-
-
