@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
-import { getGames, getGenres } from "../Redux/actions";
+import { getGames, getGenres } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 
 function Home() {

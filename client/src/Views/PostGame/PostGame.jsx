@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postGame } from "../Redux/actions";
+import { postGame } from "../../Redux/actions";
 import { Link } from "react-router-dom";
-import ListSelector from "../Components/ListSelector/ListSelector";
+import ListSelector from "../../Components/ListSelector/ListSelector";
 
 const GAME_TEMPLATE = {
   name: "",

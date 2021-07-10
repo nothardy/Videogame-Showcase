@@ -1,5 +1,6 @@
 import {
   GET_GAMES,
+  GET_GAME_DETAILS,
   GET_GENRES,
   POST_GAME,
   REMOVE_SEARCHED_GAMES_BY_NAME,
@@ -10,6 +11,7 @@ let initialState = {
   games: [],
   gamesByName: [],
   genres: [],
+  gameDetails: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +35,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+
+    case GET_GAME_DETAILS:
+      return {
+        ...state,
+        gameDetails: action.payload,
       };
 
     case REMOVE_SEARCHED_GAMES_BY_NAME:

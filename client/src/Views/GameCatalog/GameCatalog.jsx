@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { getGames, removeSearchedGamesByName } from "../Redux/actions";
+import { getGames, removeSearchedGamesByName } from "../../Redux/actions";
 import { Link } from "react-router-dom";
-import Showcase from "../Components/Showcase/Showcase";
-import Game from "../Components/Game/Game";
+import Showcase from "../../Components/Showcase/Showcase";
+import Game from "../../Components/Game/Game";
 import styles from "./GameCatalog.module.css";
-import SearchBar from "../Components/SearchBar/SearchBar";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 // PAGINATION OCCURS HERE
 
@@ -15,7 +15,9 @@ const renderGames = (games) => {
       {games.map((game, index) => {
         return (
           <li key={index}>
-            <Game game={game} />
+            <Link to={`/catalog/${game.id}`} style={{ textDecoration: "none" }}>
+              <Game game={game} />
+            </Link>
           </li>
         );
       })}
@@ -24,9 +26,6 @@ const renderGames = (games) => {
 };
 
 export function GameCatalog(props) {
-  //Redux Hooks
-  //   let games = useSelector((state) => state.games);
-  //   let gamesByName = useSelector((state) => state.gamesByName);
   let games = props.games;
   let gamesByName = props.gamesByName;
   const dispatch = useDispatch();

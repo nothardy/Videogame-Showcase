@@ -1,10 +1,12 @@
 import axios from "axios";
+import { bindActionCreators } from "redux";
 
 export const GET_GAMES = "GET_GAMES";
 export const POST_GAME = "POST_GAME";
 export const SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME";
 export const GET_GENRES = "GET_GENRES";
 export const REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME";
+export const GET_GAME_DETAILS = "GET_GAME_DETAILS";
 
 export function getGames() {
   return (dispatch) => {
@@ -49,5 +51,15 @@ export function getGenres() {
 export function removeSearchedGamesByName() {
   return (dispatch) => {
     dispatch({ type: REMOVE_SEARCHED_GAMES_BY_NAME });
+  };
+}
+
+export function getGameDetails(gameId) {
+  return (dispatch) => {
+    axios
+      .get(`http://localhost:3001/videogames/searchById/${gameId}`)
+      .then((response) => {
+        dispatch({ type: GET_GAME_DETAILS, payload: response.data });
+      });
   };
 }
