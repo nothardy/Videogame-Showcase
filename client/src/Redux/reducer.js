@@ -1,4 +1,6 @@
+import { alphabeticFilter } from "../FilterFunctions/alphabeticFilter";
 import {
+  ALPHABET_FILTER,
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
@@ -12,6 +14,7 @@ let initialState = {
   gamesByName: [],
   genres: [],
   gameDetails: {},
+  gamesFiltered: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,6 +51,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         gamesByName: [],
       };
+
+    case ALPHABET_FILTER: {
+      let gamesToFilter = state.games;
+      console.log("adentro del reducer", gamesToFilter);
+      return {
+        ...state,
+        gamesFiltered: alphabeticFilter(gamesToFilter, action.payload),
+      };
+    }
+
     default:
       return state;
   }

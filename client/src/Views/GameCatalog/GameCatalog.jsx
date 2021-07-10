@@ -6,6 +6,7 @@ import Showcase from "../../Components/Showcase/Showcase";
 import Game from "../../Components/Game/Game";
 import styles from "./GameCatalog.module.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import Filters from "../../Components/Filters/Filters";
 
 // PAGINATION OCCURS HERE
 
@@ -28,6 +29,7 @@ const renderGames = (games) => {
 export function GameCatalog(props) {
   let games = props.games;
   let gamesByName = props.gamesByName;
+  let gamesFiltered = props.gamesFiltered;
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,13 +73,16 @@ export function GameCatalog(props) {
     if (props.gamesByName.length > 0) {
       await setShownGames(props.gamesByName);
       [renderPageNumbers, currentItems] = paginate(shownGames);
+    } else if (gamesFiltered.length > 0) {
+      await setShownGames(gamesFiltered);
+      [renderPageNumbers, currentItems] = paginate(shownGames);
     } else {
       await setShownGames(props.games);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     }
 
     //if (gamesByName.length > 0) games = gamesByName;
-  }, [dispatch, games, gamesByName, resetFlag]);
+  }, [dispatch, games, gamesByName, gamesFiltered, resetFlag]);
 
   return (
     <>
@@ -89,6 +94,7 @@ export function GameCatalog(props) {
       <button className="gameFilterByName" onClick={handleReset}>
         Reset Name Filter
       </button>
+      <Filters />
 
       {renderGames(currentItems)}
       <ul className={`${styles.pageNumbers}`}>{renderPageNumbers}</ul>
@@ -100,6 +106,7 @@ const mapStateToProps = (state) => {
   return {
     games: state.games,
     gamesByName: state.gamesByName,
+    gamesFiltered: state.gamesFiltered,
   };
 };
 

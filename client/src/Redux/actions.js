@@ -1,5 +1,4 @@
 import axios from "axios";
-import { bindActionCreators } from "redux";
 
 export const GET_GAMES = "GET_GAMES";
 export const POST_GAME = "POST_GAME";
@@ -7,6 +6,9 @@ export const SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME";
 export const GET_GENRES = "GET_GENRES";
 export const REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME";
 export const GET_GAME_DETAILS = "GET_GAME_DETAILS";
+export const ALPHABET_FILTER = "ALPHABET_FILTER";
+export const RANKING_FILTER = "RANKING_FILTER";
+export const NO_FILTER = "NO_FILTER";
 
 export function getGames() {
   return (dispatch) => {
@@ -61,5 +63,25 @@ export function getGameDetails(gameId) {
       .then((response) => {
         dispatch({ type: GET_GAME_DETAILS, payload: response.data });
       });
+  };
+}
+
+export function alphabeticFilter(typeOfFilter) {
+  return {
+    type: ALPHABET_FILTER,
+    payload: typeOfFilter,
+  };
+}
+
+export function rankingFilter(typeOfFilter) {
+  return {
+    type: RANKING_FILTER,
+    payload: typeOfFilter,
+  };
+}
+
+export function noFilter() {
+  return {
+    type: NO_FILTER,
   };
 }
