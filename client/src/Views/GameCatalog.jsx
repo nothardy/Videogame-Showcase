@@ -39,41 +39,46 @@ export function GameCatalog(props) {
     setCurrentPage(Number(event.target.id));
   };
 
+  const pages = [];
+  const paginate = (shownGames) => {
+    for (let i = 1; i <= Math.ceil(shownGames.length / itemsPerPage); i++)
+      pages.push(i);
+
+    let indexOfLastItem = currentPage * itemsPerPage;
+
+    let indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    let currentItems = shownGames.slice(indexOfFirstItem, indexOfLastItem);
+
+    let renderPageNumbers = pages.map((number) => {
+      return (
+        <li key={number} id={number} onClick={handleClick}>
+          {number}
+        </li>
+      );
+    });
+
+    return [renderPageNumbers, currentItems];
+  };
+  let [renderPageNumbers, currentItems] = paginate(shownGames);
+
   const handleReset = async () => {
-    setResetFlag("wanna change");
+    setResetFlag(true);
     dispatch(removeSearchedGamesByName());
   };
 
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(shownGames.length / itemsPerPage); i++) {
-    pages.push(i);
-  }
-
-  let indexOfLastItem = currentPage * itemsPerPage;
-
-  let indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  let currentItems = shownGames.slice(indexOfFirstItem, indexOfLastItem);
-
-  let renderPageNumbers = pages.map((number) => {
-    return (
-      <li key={number} id={number} onClick={handleClick}>
-        {number}
-      </li>
-    );
-  });
-
-  useEffect(() => {
-    dispatch(getGames);
-    if (props.gamesByName > 0) {
-      setShownGames(props.gamesByName);
+  useEffect(async () => {
+    if (!games.length > 0) dispatch(getGames);
+    if (props.gamesByName.length > 0) {
+      await setShownGames(props.gamesByName);
+      [renderPageNumbers, currentItems] = paginate(shownGames);
     } else {
-      setShownGames(props.games);
+      await setShownGames(props.games);
+      [renderPageNumbers, currentItems] = paginate(shownGames);
     }
 
-    if (resetFlag == "wanna change") setResetFlag(true);
     //if (gamesByName.length > 0) games = gamesByName;
-  }, [dispatch, gamesByName, resetFlag]);
+  }, [dispatch, games, gamesByName, resetFlag]);
 
   return (
     <>
