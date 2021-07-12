@@ -70,11 +70,11 @@ export function GameCatalog(props) {
 
   useEffect(async () => {
     if (!games.length > 0) dispatch(getGames);
-    if (props.gamesByName.length > 0) {
-      await setShownGames(props.gamesByName);
-      [renderPageNumbers, currentItems] = paginate(shownGames);
-    } else if (gamesFiltered.length > 0) {
+    if (gamesFiltered.length > 0) {
       await setShownGames(gamesFiltered);
+      [renderPageNumbers, currentItems] = paginate(shownGames);
+    } else if (props.gamesByName.length > 0) {
+      await setShownGames(props.gamesByName);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else {
       await setShownGames(props.games);

@@ -1,10 +1,13 @@
 import { alphabeticFilter } from "../FilterFunctions/alphabeticFilter";
+import { ratingFilter } from "../FilterFunctions/rankingFilter";
 import {
   ALPHABET_FILTER,
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
+  NO_FILTER,
   POST_GAME,
+  RANKING_FILTER,
   REMOVE_SEARCHED_GAMES_BY_NAME,
   SEARCH_GAME_BY_NAME,
 } from "./actions";
@@ -53,13 +56,36 @@ const reducer = (state = initialState, action) => {
       };
 
     case ALPHABET_FILTER: {
-      let gamesToFilter = state.games;
-      console.log("adentro del reducer", gamesToFilter);
+      let gamesToFilter = [];
+      state.gamesByName.length > 0
+        ? (gamesToFilter = state.gamesByName.map((game) => game))
+        : state.gamesFiltered.length > 0
+        ? (gamesToFilter = state.gamesFiltered.map((game) => game))
+        : (gamesToFilter = state.games.map((game) => game));
       return {
         ...state,
         gamesFiltered: alphabeticFilter(gamesToFilter, action.payload),
       };
     }
+
+    case RANKING_FILTER: {
+      let gamesToFilter = [];
+      state.gamesByName.length > 0
+        ? (gamesToFilter = state.gamesByName.map((game) => game))
+        : state.gamesFiltered.length > 0
+        ? (gamesToFilter = state.gamesFiltered.map((game) => game))
+        : (gamesToFilter = state.games.map((game) => game));
+      return {
+        ...state,
+        gamesFiltered: ratingFilter(gamesToFilter, action.payload),
+      };
+    }
+
+    case NO_FILTER:
+      return {
+        ...state,
+        gamesFiltered: [],
+      };
 
     default:
       return state;

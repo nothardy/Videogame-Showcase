@@ -7,7 +7,7 @@ export const GET_GENRES = "GET_GENRES";
 export const REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME";
 export const GET_GAME_DETAILS = "GET_GAME_DETAILS";
 export const ALPHABET_FILTER = "ALPHABET_FILTER";
-export const RANKING_FILTER = "RANKING_FILTER";
+export const RANKING_FILTER = "RATING_FILTER";
 export const NO_FILTER = "NO_FILTER";
 
 export function getGames() {
