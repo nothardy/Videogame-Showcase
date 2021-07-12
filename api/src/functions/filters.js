@@ -28,12 +28,18 @@ const filterGameDetails = (fetchedGames) => {
       release_date: game.released,
       rating: game.rating,
       background_img: game.background_image,
-      genres: game.genres.map((genre) => {
-        return genre.name;
-      }),
-      platforms: game.parent_platforms.map((platform) => {
-        return platform.platform.name;
-      }),
+      genres: (() => {
+        if (game.genres)
+          game.genres.map((genre) => {
+            return genre.name;
+          });
+      })(),
+      platforms: (() => {
+        if (game.parent_platforms)
+          game.parent_platforms.map((platform) => {
+            return platform.platform.name;
+          });
+      })(),
     });
   }));
 };
@@ -97,7 +103,6 @@ const getDbGames = async (gameName) => {
     ],
   });
   if (dbGames.length > 0) return dbGames;
-  return { msg: "Game database is empty" };
 };
 
 const get100Games = async (api, manyGames = false) => {

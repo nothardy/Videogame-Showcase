@@ -98,6 +98,7 @@ const getAllGames = async (req, res, next) => {
       let dbGames = await getDbGames(gameName);
       let allGames = await get100Games(apiGames, true);
       allGames = allGames.concat(dbGames);
+      if (allGames[allGames.length - 1] == null) allGames.pop();
       res.json(allGames);
     } catch (error) {
       next(error);
@@ -110,6 +111,7 @@ const getAllGames = async (req, res, next) => {
       let dbGames = await getDbGames();
       let allGames = await get100Games(apiGames);
       allGames = allGames.concat(dbGames);
+      if (allGames[allGames.length - 1] == null) allGames.pop();
       res.json(allGames);
     } catch (error) {
       next(error);
