@@ -28,21 +28,36 @@ const filterGameDetails = (fetchedGames) => {
       release_date: game.released,
       rating: game.rating,
       background_img: game.background_image,
-      genres: (() => {
-        if (game.genres)
-          game.genres.map((genre) => {
-            return genre.name;
-          });
-      })(),
-      platforms: (() => {
-        if (game.parent_platforms)
-          game.parent_platforms.map((platform) => {
-            return platform.platform.name;
-          });
-      })(),
+      genres:
+        typeof game.id === "number"
+          ? game.genres.map((genre) => {
+              return genre.name;
+            })
+          : null,
+
+      platforms:
+        typeof game.id === "number"
+          ? game.parent_platforms.map((platform) => {
+              return platform.platform.name;
+            })
+          : null,
     });
   }));
 };
+
+// (() => {
+//   if (game.genres)
+//   game.genres.map((genre) => {
+//     return genre.name;
+//   });
+// })()
+
+// (() => {
+//   if (game.parent_platforms)
+//     game.parent_platforms.map((platform) => {
+//       return platform.platform.name;
+//     });
+// })(),
 
 const specificGameDetails = (game) => {
   game = game.data;
