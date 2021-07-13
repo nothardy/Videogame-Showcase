@@ -1,4 +1,5 @@
-export const genreFilter = (gamesToFilter, genresToFilter) => {
+export const genreFilter = (gamesToFilter, genresToFilter, lastFilter) => {
+  if (genresToFilter.length <= 0) return lastFilter;
   let filteredGames = gamesToFilter.map((game) => {
     if (!game.genres) {
       for (let genreToFilter of genresToFilter) {
@@ -13,5 +14,7 @@ export const genreFilter = (gamesToFilter, genresToFilter) => {
     }
   });
   filteredGames = filteredGames.filter((game) => game !== undefined);
+  if (!(filteredGames.length > 0))
+    filteredGames.push({ name: "No Matches Found" });
   return filteredGames;
 };

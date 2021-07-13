@@ -12,7 +12,7 @@ function Filters() {
 
   const handleOnChange = (e) => {
     const typeOfFiltering = e.target.value;
-    dispatch(noFilter());
+    //dispatch(noFilter());
     switch (typeOfFiltering) {
       case AZ:
         dispatch(alphabeticFilter(typeOfFiltering));
@@ -30,6 +30,7 @@ function Filters() {
       //     dispatch(noFilter());
       //     break;
       default:
+        dispatch(noFilter());
         break;
     }
   };

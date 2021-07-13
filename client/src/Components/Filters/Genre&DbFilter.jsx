@@ -17,7 +17,7 @@ function GenreAndDbFilter() {
     setGenresToFilter(newGenresToFilter);
 
     console.log(genresToFilter);
-    dispatch(noFilter());
+    //dispatch(noFilter());
     dispatch(filterByGenre(genresToFilter));
   };
 

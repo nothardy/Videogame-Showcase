@@ -20,6 +20,7 @@ let initialState = {
   genres: [],
   gameDetails: {},
   gamesFiltered: [],
+  lastFilter: [],
 };
 
 const gamesToFilterDeclaration = (state = initialState) => {
@@ -69,25 +70,33 @@ const reducer = (state = initialState, action) => {
 
     case ALPHABET_FILTER: {
       let gamesToFilter = gamesToFilterDeclaration(state);
+      gamesToFilter = alphabeticFilter(gamesToFilter, action.payload);
       return {
         ...state,
-        gamesFiltered: alphabeticFilter(gamesToFilter, action.payload),
+        gamesFiltered: gamesToFilter,
+        lastFilter: gamesToFilter,
       };
     }
 
     case RANKING_FILTER: {
       let gamesToFilter = gamesToFilterDeclaration(state);
+      gamesToFilter = ratingFilter(gamesToFilter, action.payload);
       return {
         ...state,
-        gamesFiltered: ratingFilter(gamesToFilter, action.payload),
+        gamesFiltered: gamesToFilter,
+        lastFilter: gamesToFilter,
       };
     }
 
     case FILTER_BY_GENRE: {
-      let gamesToFilter = gamesToFilterDeclaration(state);
+      let gamesToFilter = gamesToFilterDeclaration(state, action.payload);
       return {
         ...state,
-        gamesFiltered: genreFilter(gamesToFilter, action.payload),
+        gamesFiltered: genreFilter(
+          gamesToFilter,
+          action.payload,
+          state.lastFilter
+        ),
       };
     }
 
