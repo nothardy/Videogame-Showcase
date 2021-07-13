@@ -33,7 +33,7 @@ function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
           <option>----</option>
 
           {itemsList.map((item, index) => (
-            <option value={item.id} key={index}>
+            <option value={item.name} key={index}>
               {item.name}
             </option>
           ))}

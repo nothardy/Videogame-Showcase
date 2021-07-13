@@ -1,14 +1,15 @@
 import axios from "axios";
 
-export const GET_GAMES = "GET_GAMES";
-export const POST_GAME = "POST_GAME";
-export const SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME";
-export const GET_GENRES = "GET_GENRES";
-export const REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME";
-export const GET_GAME_DETAILS = "GET_GAME_DETAILS";
-export const ALPHABET_FILTER = "ALPHABET_FILTER";
-export const RANKING_FILTER = "RATING_FILTER";
-export const NO_FILTER = "NO_FILTER";
+export const GET_GAMES = "GET_GAMES",
+  POST_GAME = "POST_GAME",
+  SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME",
+  GET_GENRES = "GET_GENRES",
+  REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME",
+  GET_GAME_DETAILS = "GET_GAME_DETAILS",
+  ALPHABET_FILTER = "ALPHABET_FILTER",
+  RANKING_FILTER = "RATING_FILTER",
+  NO_FILTER = "NO_FILTER",
+  FILTER_BY_GENRE = "FILTER_BY_GENRE";
 
 export function getGames() {
   return (dispatch) => {
@@ -83,5 +84,12 @@ export function rankingFilter(typeOfFilter) {
 export function noFilter() {
   return {
     type: NO_FILTER,
+  };
+}
+
+export function filterByGenre(genresToFilter) {
+  return {
+    type: FILTER_BY_GENRE,
+    payload: genresToFilter,
   };
 }

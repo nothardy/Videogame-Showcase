@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { alphabeticFilter, noFilter, rankingFilter } from "../../Redux/actions";
 export const AZ = "A-Z";
@@ -8,7 +8,6 @@ export const LOWEST = "From Lowest Rating";
 export const ALL = "All Games;";
 
 function Filters() {
-  const [filter, setFilter] = useState(ALL);
   const dispatch = useDispatch();
 
   const handleOnChange = (e) => {

@@ -7,6 +7,7 @@ import Game from "../../Components/Game/Game";
 import styles from "./GameCatalog.module.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Filters from "../../Components/Filters/Filters";
+import GenreAndDbFilter from "../../Components/Filters/Genre&DbFilter";
 
 // PAGINATION OCCURS HERE
 
@@ -95,6 +96,7 @@ export function GameCatalog(props) {
         Reset Name Filter
       </button>
       <Filters />
+      <GenreAndDbFilter />
 
       {renderGames(currentItems)}
       <ul className={`${styles.pageNumbers}`}>{renderPageNumbers}</ul>

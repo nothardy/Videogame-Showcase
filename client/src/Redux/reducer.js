@@ -1,7 +1,9 @@
 import { alphabeticFilter } from "../FilterFunctions/alphabeticFilter";
+import { genreFilter } from "../FilterFunctions/genreFilter";
 import { ratingFilter } from "../FilterFunctions/rankingFilter";
 import {
   ALPHABET_FILTER,
+  FILTER_BY_GENRE,
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
@@ -18,6 +20,16 @@ let initialState = {
   genres: [],
   gameDetails: {},
   gamesFiltered: [],
+};
+
+const gamesToFilterDeclaration = (state = initialState) => {
+  let gamesToFilter = [];
+  state.gamesByName.length > 0
+    ? (gamesToFilter = state.gamesByName.map((game) => game))
+    : state.gamesFiltered.length > 0
+    ? (gamesToFilter = state.gamesFiltered.map((game) => game))
+    : (gamesToFilter = state.games.map((game) => game));
+  return gamesToFilter;
 };
 
 const reducer = (state = initialState, action) => {
@@ -56,12 +68,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case ALPHABET_FILTER: {
-      let gamesToFilter = [];
-      state.gamesByName.length > 0
-        ? (gamesToFilter = state.gamesByName.map((game) => game))
-        : state.gamesFiltered.length > 0
-        ? (gamesToFilter = state.gamesFiltered.map((game) => game))
-        : (gamesToFilter = state.games.map((game) => game));
+      let gamesToFilter = gamesToFilterDeclaration(state);
       return {
         ...state,
         gamesFiltered: alphabeticFilter(gamesToFilter, action.payload),
@@ -69,15 +76,18 @@ const reducer = (state = initialState, action) => {
     }
 
     case RANKING_FILTER: {
-      let gamesToFilter = [];
-      state.gamesByName.length > 0
-        ? (gamesToFilter = state.gamesByName.map((game) => game))
-        : state.gamesFiltered.length > 0
-        ? (gamesToFilter = state.gamesFiltered.map((game) => game))
-        : (gamesToFilter = state.games.map((game) => game));
+      let gamesToFilter = gamesToFilterDeclaration(state);
       return {
         ...state,
         gamesFiltered: ratingFilter(gamesToFilter, action.payload),
+      };
+    }
+
+    case FILTER_BY_GENRE: {
+      let gamesToFilter = gamesToFilterDeclaration(state);
+      return {
+        ...state,
+        gamesFiltered: genreFilter(gamesToFilter, action.payload),
       };
     }
 
