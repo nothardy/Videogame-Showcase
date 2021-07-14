@@ -37,9 +37,11 @@ const filterGameDetails = (fetchedGames) => {
 
       platforms:
         typeof game.id === "number"
-          ? game.parent_platforms.map((platform) => {
-              return platform.platform.name;
-            })
+          ? game.parent_platforms
+            ? game.parent_platforms.map((platform) => {
+                return platform.platform.name;
+              })
+            : null
           : null,
     });
   }));

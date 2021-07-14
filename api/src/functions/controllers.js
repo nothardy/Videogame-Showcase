@@ -3,7 +3,6 @@ const {
   filterGameDetails,
   specificGameDetails,
   filterGenres,
-  filterGameDetails2,
   get100Games,
   getDbGames,
 } = require("./filters");
@@ -83,18 +82,36 @@ const getDynamicResultPages = async (url = "url") => {
     next(error);
   }
 };
+const getFewGames = async (req, res, next) => {
+  try {
+    let apiGames = await axios.get(
+      `https://api.rawg.io/api/games?key=${API_KEY}&page_size=10`
+    );
+    let dbGames = await getDbGames();
+    apiGames = filterGameDetails(apiGames.data.results);
+    let allGames = apiGames.concat(dbGames);
+    if (allGames[allGames.length - 1] == null) allGames.pop();
+    res.json(allGames);
+  } catch (error) {
+    next(error);
+  }
+};
 
 const getAllGames = async (req, res, next) => {
   if (req.url.includes("?name")) {
-    const gameName = req.query.name;
+    let gameName = req.query.name;
+    let gameNameUrl = gameName.split(" ").join("%20");
+    console.log(gameNameUrl);
     try {
       let apiGames = await axios.get(
-        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameName}`
+        `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameNameUrl}`
       );
       if (!apiGames.data.results[0])
         return res
           .status(400)
           .json({ error: "Game not found. Please enter a valid name" });
+
+      console.log(apiGames.data);
       let dbGames = await getDbGames(gameName);
       let allGames = await get100Games(apiGames, true);
       allGames = allGames.concat(dbGames);
@@ -289,4 +306,5 @@ module.exports = {
   postGameIntoDb,
   getGameById,
   getGenres,
+  getFewGames,
 };
