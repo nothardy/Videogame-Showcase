@@ -9,13 +9,24 @@ export const GET_GAMES = "GET_GAMES",
   ALPHABET_FILTER = "ALPHABET_FILTER",
   RANKING_FILTER = "RATING_FILTER",
   NO_FILTER = "NO_FILTER",
-  FILTER_BY_GENRE = "FILTER_BY_GENRE";
+  FILTER_BY_GENRE = "FILTER_BY_GENRE",
+  GET_FEW_GAMES = "GET_FEW_GAMES";
 
 export function getGames() {
   return (dispatch) => {
     axios.get("http://localhost:3001/videogames").then((response) => {
       dispatch({ type: GET_GAMES, payload: response.data });
     });
+  };
+}
+
+export function getFewGames() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/videogames/getFewGames")
+      .then((response) => {
+        dispatch({ type: GET_FEW_GAMES, payload: response.data });
+      });
   };
 }
 

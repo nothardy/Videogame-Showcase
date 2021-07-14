@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
-import { getGames, getGenres } from "../../Redux/actions";
+import { getFewGames, getGames, getGenres } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 
 function Home() {
@@ -13,8 +13,9 @@ function Home() {
 
   const handleOnClick = async () => {
     if (getData.dataAlreadyFetched === false) {
-      dispatch(getGames());
+      dispatch(getFewGames());
       dispatch(getGenres());
+      dispatch(getGames());
       setGetData({
         ...getData,
         dataAlreadyFetched: true,

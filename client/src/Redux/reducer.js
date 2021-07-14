@@ -4,6 +4,7 @@ import { ratingFilter } from "../FilterFunctions/rankingFilter";
 import {
   ALPHABET_FILTER,
   FILTER_BY_GENRE,
+  GET_FEW_GAMES,
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
@@ -15,6 +16,7 @@ import {
 } from "./actions";
 
 let initialState = {
+  fewGames: [],
   games: [],
   gamesByName: [],
   genres: [],
@@ -39,6 +41,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         games: action.payload,
+      };
+    case GET_FEW_GAMES:
+      return {
+        ...state,
+        fewGames: action.payload,
       };
     case POST_GAME:
       return {

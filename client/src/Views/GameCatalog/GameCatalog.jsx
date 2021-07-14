@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { getGames, removeSearchedGamesByName } from "../../Redux/actions";
+import {
+  get20Games,
+  getGames,
+  removeSearchedGamesByName,
+} from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import Showcase from "../../Components/Showcase/Showcase";
 import Game from "../../Components/Game/Game";
@@ -31,12 +35,13 @@ export function GameCatalog(props) {
   let games = props.games;
   let gamesByName = props.gamesByName;
   let gamesFiltered = props.gamesFiltered;
+  let fewGames = props.fewGames;
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [resetFlag, setResetFlag] = useState(false);
-  const [shownGames, setShownGames] = useState(props.games);
+  const [shownGames, setShownGames] = useState(fewGames);
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
@@ -67,23 +72,28 @@ export function GameCatalog(props) {
   const handleReset = async () => {
     setResetFlag(true);
     dispatch(removeSearchedGamesByName());
+    setResetFlag(false);
   };
 
   useEffect(async () => {
+    //if(!twentyGames>0)dispatch(get20Games)
     if (!games.length > 0) dispatch(getGames);
     if (gamesFiltered.length > 0) {
       await setShownGames(gamesFiltered);
       [renderPageNumbers, currentItems] = paginate(shownGames);
-    } else if (props.gamesByName.length > 0) {
-      await setShownGames(props.gamesByName);
+    } else if (gamesByName.length > 0) {
+      await setShownGames(gamesByName);
+      [renderPageNumbers, currentItems] = paginate(shownGames);
+    } else if (games.length > 0) {
+      await setShownGames(props.games);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else {
-      await setShownGames(props.games);
+      await setShownGames(props.fewGames);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     }
 
     //if (gamesByName.length > 0) games = gamesByName;
-  }, [dispatch, games, gamesByName, gamesFiltered, resetFlag]);
+  }, [dispatch, fewGames, games, gamesByName, gamesFiltered, resetFlag]);
 
   return (
     <>
@@ -109,6 +119,7 @@ const mapStateToProps = (state) => {
     games: state.games,
     gamesByName: state.gamesByName,
     gamesFiltered: state.gamesFiltered,
+    fewGames: state.fewGames,
   };
 };
 
