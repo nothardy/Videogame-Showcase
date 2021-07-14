@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { alphabeticFilter, noFilter, rankingFilter } from "../../Redux/actions";
 export const AZ = "A-Z";

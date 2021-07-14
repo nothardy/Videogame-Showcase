@@ -72,7 +72,6 @@ export function GameCatalog(props) {
   const handleReset = async () => {
     setResetFlag(true);
     dispatch(removeSearchedGamesByName());
-    setResetFlag(false);
   };
 
   useEffect(async () => {
@@ -92,6 +91,8 @@ export function GameCatalog(props) {
       [renderPageNumbers, currentItems] = paginate(shownGames);
     }
 
+    if (resetFlag === true) setResetFlag(false);
+
     //if (gamesByName.length > 0) games = gamesByName;
   }, [dispatch, fewGames, games, gamesByName, gamesFiltered, resetFlag]);
 
@@ -106,7 +107,7 @@ export function GameCatalog(props) {
         Reset Name Filter
       </button>
       <Filters />
-      <GenreAndDbFilter />
+      {resetFlag == false && <GenreAndDbFilter />}
 
       {renderGames(currentItems)}
       <ul className={`${styles.pageNumbers}`}>{renderPageNumbers}</ul>

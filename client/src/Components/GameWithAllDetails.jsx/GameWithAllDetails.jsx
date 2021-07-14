@@ -1,12 +1,23 @@
-import React from "react";
-import parser from "html-react-parser";
+import React, { useState } from "react";
 import styles from "./GameWithAllDetails.module.css";
 
 function GameWithAllDetails(props) {
+  const [readMore, setReadMore] = useState(false);
+  let header = "Description: ";
+
   const setInnerHtml = (description) => {
-    let header = "Description: ";
-    description = header.concat(description);
-    return { __html: description };
+    if (readMore === false) {
+      description = header.concat(description).slice(0, 60);
+    } else {
+      description = header.concat(description);
+      return { __html: description };
+    }
+  };
+
+  const linkName = readMore ? "Hide Description <<" : "See Description >>";
+
+  const handleOnClick = () => {
+    setReadMore(!readMore);
   };
 
   return (
@@ -21,24 +32,43 @@ function GameWithAllDetails(props) {
           </div>
           <div className={`${styles.gameInfo}`}>
             <div>
-              <p>Name:{props.game.name}</p>
+              <p>
+                Name:
+                <br />
+                {props.game.name}
+              </p>
             </div>
             <div>
-              <p>Genres:{props.game.genres}</p>
+              <p>
+                Genres:
+                <br />
+                {props.game.genres && props.game.genres.join(", ")}
+              </p>
             </div>
             <div>
-              <p>Rating:{props.game.rating}</p>
+              <p>
+                Rating:
+                <br />
+                {props.game.rating}
+              </p>
             </div>
             <div>
-              <p>Platforms:{props.game.platforms}</p>
+              <p>
+                Platforms: <br />
+                {props.game.platforms && props.game.platforms.join(", ")}
+              </p>
             </div>
             <div>
-              <p>Platforms:{props.game.platforms}</p>
+              <p>
+                Release Date:
+                <br />
+                {props.game.release_date}
+              </p>
             </div>
             <div>
-              <p>Release Date:{props.game.release_date}</p>
-            </div>
-            <div>
+              <a className="read-more-link" onClick={handleOnClick}>
+                <p>{linkName}</p>
+              </a>
               <div
                 dangerouslySetInnerHTML={setInnerHtml(props.game.description)}
               ></div>

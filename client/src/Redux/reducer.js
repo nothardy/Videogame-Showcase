@@ -73,6 +73,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         gamesByName: [],
+        gamesFiltered: [],
       };
 
     case ALPHABET_FILTER: {
