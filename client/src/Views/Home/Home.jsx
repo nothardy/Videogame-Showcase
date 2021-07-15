@@ -27,11 +27,14 @@ function Home() {
   return (
     <>
       <div class="big-container">
-        <Link to="/catalog">
-          <button class="start-button" onClick={handleOnClick}>
-            <h4>{getData.buttonTitle}</h4>
-          </button>
-        </Link>
+        <div class="title-and-button">
+          <h4 id="title">Wanna see games?</h4>
+          <Link to="/catalog">
+            <button class="start-button" onClick={handleOnClick}>
+              <h4>{getData.buttonTitle}</h4>
+            </button>
+          </Link>
+        </div>
         <img
           class="img"
           src="https://areajugones.sport.es/wp-content/uploads/2019/02/The-Witcher-Sapkowski.jpeg"

@@ -98,18 +98,28 @@ export function GameCatalog(props) {
 
   return (
     <>
-      <h3 className="title">Games</h3>
-      <Link to="/postgame">
-        <button className="postGame">Add your own Game!</button>
-      </Link>
-      <SearchBar reset={resetFlag} />
-      <button className="gameFilterByName" onClick={handleReset}>
-        Reset Name Filter
-      </button>
-      <Filters />
+      <div className="upper-buttons">
+        <div className="searchbar-and-filters">
+          <div>
+            <SearchBar reset={resetFlag} />
+          </div>
+          <div className="filter">
+            Filter By:
+            <Filters />
+          </div>
+        </div>
+        <div>
+          <Link to="/postgame">
+            <button className="add-game-button">Add your own Game!</button>
+          </Link>
+        </div>
+      </div>
       <div className="showcase-and-genrefilters">
         <div className="genre-filter">
-          {resetFlag == false && <GenreAndDbFilter />}
+          <button className="gameFilterByName" onClick={handleReset}>
+            Reset Name Filter
+          </button>
+          Filter By Genre:{resetFlag == false && <GenreAndDbFilter />}
         </div>
 
         <div className="game-container">{renderGames(currentItems)}</div>
@@ -129,3 +139,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(GameCatalog);
+
+/* <h3 className="title">Games</h3> */

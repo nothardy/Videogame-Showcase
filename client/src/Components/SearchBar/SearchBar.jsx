@@ -4,7 +4,7 @@ import {
   removeSearchedGamesByName,
   searchGameByName,
 } from "../../Redux/actions";
-import styles from "./SearchBar.module.css";
+import "./SearchBar.css";
 
 function SearchBar(props) {
   const [game, setGame] = useState("");
@@ -25,9 +25,17 @@ function SearchBar(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label className={`${styles.label}`}>Looking for a game?</label>
-        <input name="game" onChange={handleChange} value={game} />
-        <button type="submit">Search</button>
+        <label className="label">Looking for a game?</label>
+        <input
+          className="searchbar-input"
+          name="game"
+          placeholder="Write it here..."
+          onChange={handleChange}
+          value={game}
+        />
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass">Search</i>
+        </button>
       </form>
     </>
   );
