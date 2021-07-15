@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import Showcase from "../../Components/Showcase/Showcase";
 import Game from "../../Components/Game/Game";
-import styles from "./GameCatalog.module.css";
+import "./GameCatalog.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Filters from "../../Components/Filters/Filters";
 import GenreAndDbFilter from "../../Components/Filters/Genre&DbFilter";
@@ -17,17 +17,17 @@ import GenreAndDbFilter from "../../Components/Filters/Genre&DbFilter";
 
 const renderGames = (games) => {
   return (
-    <ul>
+    <div className="showcase">
       {games.map((game, index) => {
         return (
-          <li key={index}>
+          <div key={index}>
             <Link to={`/catalog/${game.id}`} style={{ textDecoration: "none" }}>
               <Game game={game} />
             </Link>
-          </li>
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 };
 
@@ -39,7 +39,7 @@ export function GameCatalog(props) {
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [resetFlag, setResetFlag] = useState(false);
   const [shownGames, setShownGames] = useState(fewGames);
   const handleClick = (event) => {
@@ -98,7 +98,7 @@ export function GameCatalog(props) {
 
   return (
     <>
-      <h3 className={`${styles.title}`}>Games</h3>
+      <h3 className="title">Games</h3>
       <Link to="/postgame">
         <button className="postGame">Add your own Game!</button>
       </Link>
@@ -107,10 +107,14 @@ export function GameCatalog(props) {
         Reset Name Filter
       </button>
       <Filters />
-      {resetFlag == false && <GenreAndDbFilter />}
+      <div className="showcase-and-genrefilters">
+        <div className="genre-filter">
+          {resetFlag == false && <GenreAndDbFilter />}
+        </div>
 
-      {renderGames(currentItems)}
-      <ul className={`${styles.pageNumbers}`}>{renderPageNumbers}</ul>
+        <div className="game-container">{renderGames(currentItems)}</div>
+      </div>
+      <ul className="page-numbers">{renderPageNumbers}</ul>
     </>
   );
 }

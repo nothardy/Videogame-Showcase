@@ -11,6 +11,7 @@ import {
   NO_FILTER,
   POST_GAME,
   RANKING_FILTER,
+  REMOVE_GAME_DETAILS,
   REMOVE_SEARCHED_GAMES_BY_NAME,
   SEARCH_GAME_BY_NAME,
 } from "./actions";
@@ -74,6 +75,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         gamesByName: [],
         gamesFiltered: [],
+      };
+
+    case REMOVE_GAME_DETAILS:
+      return {
+        ...state,
+        gameDetails: [],
       };
 
     case ALPHABET_FILTER: {

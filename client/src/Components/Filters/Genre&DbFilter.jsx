@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByGenre, noFilter } from "../../Redux/actions";
+import "./Genre&DbFilter.css";
 
 function GenreAndDbFilter() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function GenreAndDbFilter() {
 
   return (
     <>
-      <div className="genreCheckbox">
+      <div className="genre-checkbox">
         <label htmlFor="">
           {"From Db"}
           <input type="checkbox" onChange={handleOnChange} value={"From Db"} />

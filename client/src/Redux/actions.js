@@ -5,6 +5,7 @@ export const GET_GAMES = "GET_GAMES",
   SEARCH_GAME_BY_NAME = "SEARCH_GAME_BY_NAME",
   GET_GENRES = "GET_GENRES",
   REMOVE_SEARCHED_GAMES_BY_NAME = "REMOVE_SEARCHED_GAMES_BY_NAME",
+  REMOVE_GAME_DETAILS = "REMOVE_GAME_DETAILS",
   GET_GAME_DETAILS = "GET_GAME_DETAILS",
   ALPHABET_FILTER = "ALPHABET_FILTER",
   RANKING_FILTER = "RATING_FILTER",
@@ -65,6 +66,12 @@ export function getGenres() {
 export function removeSearchedGamesByName() {
   return (dispatch) => {
     dispatch({ type: REMOVE_SEARCHED_GAMES_BY_NAME });
+  };
+}
+
+export function removeGameDetails() {
+  return (dispatch) => {
+    dispatch({ type: REMOVE_GAME_DETAILS });
   };
 }
 

@@ -1,0 +1,51 @@
+.page-numbers {
+  display: flex;
+  justify-content: center;
+
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  list-style: none;
+  display: flex;
+}
+
+.page-numbers li {
+  width: 60px;
+  color: rgb(192, 12, 12);
+  padding: 10px;
+  cursor: pointer;
+  background-color: black;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: rgb(192, 12, 12);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.game-container {
+  border: 1px solid rgb(192, 12, 12);
+}
+
+.showcase-and-genrefilters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.genre-filter {
+  width: 22%;
+}
+
+.showcase {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  border: solid 2px white;
+  width: 100%;
+}

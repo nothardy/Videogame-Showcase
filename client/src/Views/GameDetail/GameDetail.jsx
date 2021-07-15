@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import GameWithAllDetails from "../../Components/GameWithAllDetails.jsx/GameWithAllDetails";
-import { getGameDetails } from "../../Redux/actions";
+import { getGameDetails, removeGameDetails } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 
@@ -18,12 +18,18 @@ function GameDetail() {
     }
   }, [gameId]);
 
+  const handleOnClick = (e) => {
+    if (gameId !== gameDetails.id) {
+      dispatch(removeGameDetails());
+    }
+  };
+
   return (
     <>
       <Link to="/catalog" style={{ textDecoration: "none" }}>
         <button className="backtoshowcase">back To Showcase</button>
       </Link>
-      <GameWithAllDetails game={gameDetails} />
+      <GameWithAllDetails game={gameDetails} onClick={handleOnClick} />
     </>
   );
 }

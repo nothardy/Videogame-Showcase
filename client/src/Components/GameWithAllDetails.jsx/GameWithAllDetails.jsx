@@ -22,58 +22,62 @@ function GameWithAllDetails(props) {
 
   return (
     <>
-      <div className={`${styles.gameContainer}`}>
-        <div className={`${styles.row}`}>
-          <div>
-            <img
-              className={`${styles.gameImg}`}
-              src={props.game.background_img}
-            />
+      <div className={`${styles.row}`}>
+        <div className={`${styles.gameContainer}`}>
+          <div className={`${styles.row}`}>
+            <div>
+              <img
+                className={`${styles.gameImg}`}
+                src={props.game.background_img}
+              />
+            </div>
+            <div className={`${styles.gameInfo}`}>
+              <div>
+                <p>
+                  Name:
+                  <br />
+                  {props.game.name}
+                </p>
+              </div>
+              <div>
+                <p>
+                  Genres:
+                  <br />
+                  {props.game.genres && props.game.genres.join(", ")}
+                </p>
+              </div>
+              <div>
+                <p>
+                  Rating:
+                  <br />
+                  {props.game.rating}
+                </p>
+              </div>
+              <div>
+                <p>
+                  Platforms: <br />
+                  {props.game.platforms && props.game.platforms.join(", ")}
+                </p>
+              </div>
+              <div>
+                <p>
+                  Release Date:
+                  <br />
+                  {props.game.release_date}
+                </p>
+              </div>
+              <div>
+                <a className="read-more-link" onClick={handleOnClick}>
+                  <p>{linkName}</p>
+                </a>
+              </div>
+            </div>
           </div>
-          <div className={`${styles.gameInfo}`}>
-            <div>
-              <p>
-                Name:
-                <br />
-                {props.game.name}
-              </p>
-            </div>
-            <div>
-              <p>
-                Genres:
-                <br />
-                {props.game.genres && props.game.genres.join(", ")}
-              </p>
-            </div>
-            <div>
-              <p>
-                Rating:
-                <br />
-                {props.game.rating}
-              </p>
-            </div>
-            <div>
-              <p>
-                Platforms: <br />
-                {props.game.platforms && props.game.platforms.join(", ")}
-              </p>
-            </div>
-            <div>
-              <p>
-                Release Date:
-                <br />
-                {props.game.release_date}
-              </p>
-            </div>
-            <div>
-              <a className="read-more-link" onClick={handleOnClick}>
-                <p>{linkName}</p>
-              </a>
-              <div
-                dangerouslySetInnerHTML={setInnerHtml(props.game.description)}
-              ></div>
-            </div>
-          </div>
+        </div>
+        <div className={`${styles.gameContainer}`}>
+          <div
+            dangerouslySetInnerHTML={setInnerHtml(props.game.description)}
+          ></div>
         </div>
       </div>
     </>

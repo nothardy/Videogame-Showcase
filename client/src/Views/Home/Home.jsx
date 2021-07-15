@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { getFewGames, getGames, getGenres } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
+import "./Home.css";
 
 function Home() {
   const [getData, setGetData] = useState({
@@ -25,12 +26,16 @@ function Home() {
 
   return (
     <>
-      <div className={`${styles.bigContainer}`}>
-        <div className="startButton">
-          <Link to="/catalog">
-            <button onClick={handleOnClick}>{getData.buttonTitle}</button>
-          </Link>
-        </div>
+      <div class="big-container">
+        <Link to="/catalog">
+          <button class="start-button" onClick={handleOnClick}>
+            <h4>{getData.buttonTitle}</h4>
+          </button>
+        </Link>
+        <img
+          class="img"
+          src="https://areajugones.sport.es/wp-content/uploads/2019/02/The-Witcher-Sapkowski.jpeg"
+        />
       </div>
     </>
   );
@@ -60,3 +65,11 @@ export default Home;
           />
         </div>
 */
+/*
+<div className={`${styles.bigContainer}`}>
+        <div className="startButton">
+          <Link to="/catalog">
+            <button onClick={handleOnClick}>{getData.buttonTitle}</button>
+          </Link>
+        </div>
+      </div> */
