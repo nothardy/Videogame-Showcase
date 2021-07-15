@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ListSelector.css";
 
 function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
   const [selectorErrorHandler, setSelectorErrorHandler] = useState({
@@ -25,7 +26,7 @@ function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
       <label htmlFor="">
         {itemToSelect} <br />
         <select
-          className="listSelector"
+          className="list-selector"
           name={itemToSelect}
           onChange={handleChange}
           onInput={selectorHandler}
@@ -33,7 +34,7 @@ function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
           <option>----</option>
 
           {itemsList.map((item, index) => (
-            <option value={item.name} key={index}>
+            <option className="list-selector" value={item.name} key={index}>
               {item.name}
             </option>
           ))}

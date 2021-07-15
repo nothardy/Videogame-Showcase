@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { alphabeticFilter, noFilter, rankingFilter } from "../../Redux/actions";
-export const AZ = "A-Z";
-export const ZA = "Z-A";
-export const HIGHEST = "From Highest Rating";
-export const LOWEST = "From Lowest Rating";
-export const ALL = "All Games;";
+import "./Filters.css";
+export const AZ = "A-Z",
+  ZA = "Z-A",
+  HIGHEST = "From Highest Rating",
+  LOWEST = "From Lowest Rating",
+  ALL = "All Games";
 
 function Filters() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function Filters() {
   return (
     <>
       <select name="filter" onChange={handleOnChange} className="filter-select">
+        <option disabled="disabled" selected="selected">
+          Choose a Filter
+        </option>
         <option>{ALL}</option>
         <option>{AZ}</option>
         <option>{ZA}</option>

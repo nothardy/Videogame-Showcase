@@ -116,8 +116,8 @@ export function GameCatalog(props) {
       </div>
       <div className="showcase-and-genrefilters">
         <div className="genre-filter">
-          <button className="gameFilterByName" onClick={handleReset}>
-            Reset Name Filter
+          <button className="reset-name-button" onClick={handleReset}>
+            Reset Filters
           </button>
           Filter By Genre:{resetFlag == false && <GenreAndDbFilter />}
         </div>

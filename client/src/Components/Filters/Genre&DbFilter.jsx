@@ -26,13 +26,13 @@ function GenreAndDbFilter() {
     <>
       <div className="genre-checkbox">
         <label htmlFor="">
-          {"From Db"}
+          {"From Db "}
           <input type="checkbox" onChange={handleOnChange} value={"From Db"} />
         </label>
         {genres.map((genre) => (
-          <div key={genre.id} className="genreContainer">
+          <div key={genre.id} className="genre-container">
             <label htmlFor="">
-              {genre.name}
+              {genre.name + " "}
               <input
                 key={genre.id}
                 type="checkbox"

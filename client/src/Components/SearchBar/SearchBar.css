@@ -10,6 +10,23 @@
   border: solid 1px rgb(192, 12, 12);
 }
 
+.button {
+  padding-top: 3%;
+  width: 100px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background: rgb(32, 31, 31);
+  color: rgb(192, 12, 12);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.4s;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+}
+
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(192, 12, 12);
