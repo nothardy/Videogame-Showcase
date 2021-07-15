@@ -101,7 +101,7 @@ const getAllGames = async (req, res, next) => {
   if (req.url.includes("?name")) {
     let gameName = req.query.name;
     let gameNameUrl = gameName.split(" ").join("%20");
-    console.log(gameNameUrl);
+
     try {
       let apiGames = await axios.get(
         `https://api.rawg.io/api/games?key=${API_KEY}&search=${gameNameUrl}`
@@ -111,7 +111,6 @@ const getAllGames = async (req, res, next) => {
           .status(400)
           .json({ error: "Game not found. Please enter a valid name" });
 
-      console.log(apiGames.data);
       let dbGames = await getDbGames(gameName);
       let allGames = await get100Games(apiGames, true);
       allGames = allGames.concat(dbGames);
