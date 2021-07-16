@@ -27,7 +27,7 @@ function SearchBar(props) {
       <div className="example">
         <div className="searchbar">
           <form onSubmit={handleSubmit}>
-            <label className="label">Looking for a game?</label>
+            <label className="label">Looking for a game? </label>
             <input
               className="searchbar-input"
               name="game"

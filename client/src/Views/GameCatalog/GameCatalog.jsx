@@ -21,7 +21,7 @@ const renderGames = (games) => {
       {games.map((game, index) => {
         return (
           <div key={index}>
-            <Link to={`/catalog/${game.id}`} style={{ textDecoration: "none" }}>
+            <Link className="react-link" to={`/catalog/${game.id}`}>
               <Game game={game} />
             </Link>
           </div>
@@ -39,9 +39,10 @@ export function GameCatalog(props) {
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [resetFlag, setResetFlag] = useState(false);
   const [shownGames, setShownGames] = useState(fewGames);
+
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
@@ -59,7 +60,12 @@ export function GameCatalog(props) {
 
     let renderPageNumbers = pages.map((number) => {
       return (
-        <li key={number} id={number} onClick={handleClick}>
+        <li
+          className={currentPage == number ? "active" : null}
+          key={number}
+          id={number}
+          onClick={handleClick}
+        >
           {number}
         </li>
       );
@@ -104,7 +110,7 @@ export function GameCatalog(props) {
             <SearchBar reset={resetFlag} />
           </div>
           <div className="filter">
-            Filter By:
+            Filter By
             <Filters />
           </div>
         </div>
@@ -122,7 +128,9 @@ export function GameCatalog(props) {
           Filter By Genre:{resetFlag == false && <GenreAndDbFilter />}
         </div>
 
-        <div className="game-container">{renderGames(currentItems)}</div>
+        <div className="game-container-catalog">
+          {renderGames(currentItems)}
+        </div>
       </div>
       <ul className="page-numbers">{renderPageNumbers}</ul>
     </>

@@ -1,6 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import styles from "./Game.module.css";
 import "./Game.css";
 
 function Game(props) {
@@ -12,14 +10,16 @@ function Game(props) {
             <img className="game-img" src={props.game.background_img} />
           </div>
           <div className="game-info">
-            <div>
-              <p>Name:{props.game.name}</p>
+            <div className="game-title">
+              <p>{props.game.name}</p>
             </div>
             <div>
-              <p>Genres:{props.game.genres}</p>
+              <p className="platforms">
+                {props.game.genres && props.game.genres.join(", ")}
+              </p>
             </div>
             <div>
-              <p>Rating:{props.game.rating}</p>
+              <p className="rating">Rating {props.game.rating}</p>
             </div>
           </div>
         </div>

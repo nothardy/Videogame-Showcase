@@ -21,10 +21,10 @@
   text-transform: uppercase;
   letter-spacing: 5px;
   font-size: 15px;
-  -webkit-animation: pulse 0.25s infinite cubic-bezier(0.66, 0, 0, 1);
-  -moz-animation: pulse 0s infinite cubic-bezier(0.66, 0, 0, 1);
-  -ms-animation: pulse 0s infinite cubic-bezier(0.66, 0, 0, 1);
-  animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+  -webkit-animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 @-webkit-keyframes pulse {
   to {
