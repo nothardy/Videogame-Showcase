@@ -1,7 +1,6 @@
 .page-numbers {
   display: flex;
   justify-content: center;
-
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   letter-spacing: 5px;
@@ -14,12 +13,13 @@
   justify-content: center;
   width: 50px;
   color: rgb(192, 12, 12);
-  padding: 10px;
+  padding: 2px;
   cursor: pointer;
   background-color: black;
 }
 
-.page-numbers li.active {
+.page-numbers li.active,
+.page-numbers li:hover {
   border-radius: 5px;
   transform: translateY(-5px);
   box-shadow: 0 10px 10px -5px rgb(192, 12, 12);
@@ -34,12 +34,8 @@
   letter-spacing: 5px;
 }
 
-.game-container-catalog {
-  border: 1px solid rgb(192, 12, 12);
-}
-
 .showcase-and-genrefilters {
-  padding-top: 2%;
+  padding-top: 1%;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
@@ -54,14 +50,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
-  border: solid 2px white;
   width: 100%;
+  padding-bottom: 2%;
 }
 
 .upper-buttons {
   background-color: rgb(32, 31, 31);
-  padding-top: 5%;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;

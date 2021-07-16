@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByGenre, noFilter } from "../../Redux/actions";
 import "./Genre&DbFilter.css";
+//import "./Checkbox.css";
+import Checkbox from "./Checkbox";
 
 function GenreAndDbFilter() {
   const dispatch = useDispatch();
@@ -25,21 +27,22 @@ function GenreAndDbFilter() {
   return (
     <>
       <div className="genre-checkbox">
-        <label htmlFor="">
-          {"From Db "}
-          <input type="checkbox" onChange={handleOnChange} value={"From Db"} />
-        </label>
+        <div className="db-checkbox">
+          <div>{"From Db "}</div>
+          <div>
+            <Checkbox key="rtf" value={"From Db "} onChange={handleOnChange} />
+          </div>
+        </div>
         {genres.map((genre) => (
           <div key={genre.id} className="genre-container">
-            <label htmlFor="">
-              {genre.name + " "}
-              <input
+            <div>{genre.name + " "}</div>
+            <div>
+              <Checkbox
                 key={genre.id}
-                type="checkbox"
                 value={genre.name}
                 onChange={handleOnChange}
               />
-            </label>
+            </div>
           </div>
         ))}
       </div>
@@ -48,3 +51,11 @@ function GenreAndDbFilter() {
 }
 
 export default GenreAndDbFilter;
+
+/* <input
+                key={genre.id}
+                type="checkbox"
+                value={genre.name}
+                onChange={handleOnChange}
+              />
+              */

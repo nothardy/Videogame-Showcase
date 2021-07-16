@@ -1,13 +1,37 @@
 .genre-checkbox {
   color: rgb(192, 12, 12);
   font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 80%;
 }
 
+.db-checkbox,
 .genre-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+
+  justify-content: space-between;
+  width: 70%;
+  align-items: center;
+}
+
+.genre-container input {
+  background: rgb(192, 12, 12);
+}
+.genre-container input:hover {
+  cursor: pointer;
+  background: rgb(192, 12, 12);
+}
+
+/*
+genre-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   color: rgb(192, 12, 12);
   font-family: "Poppins", sans-serif;
   font-size: 1.1em;
 }
+*/
