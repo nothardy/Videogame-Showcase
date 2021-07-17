@@ -5,12 +5,7 @@ function Checkbox(props) {
   return (
     <>
       <label class="b-contain">
-        <input
-          type="checkbox"
-          key={props.key}
-          value={props.value}
-          onChange={props.onChange}
-        />
+        <input type="checkbox" value={props.value} onChange={props.onChange} />
         <div class="b-input"></div>
       </label>
     </>

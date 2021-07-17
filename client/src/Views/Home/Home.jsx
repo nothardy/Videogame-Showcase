@@ -26,17 +26,17 @@ function Home() {
 
   return (
     <>
-      <div class="big-container">
-        <div class="title-and-button">
+      <div className="big-container">
+        <div className="title-and-button">
           <h4 id="title">Wanna see games?</h4>
           <Link to="/catalog">
-            <button class="start-button" onClick={handleOnClick}>
+            <button className="start-button" onClick={handleOnClick}>
               <h4>{getData.buttonTitle}</h4>
             </button>
           </Link>
         </div>
         <img
-          class="img"
+          className="img"
           src="https://areajugones.sport.es/wp-content/uploads/2019/02/The-Witcher-Sapkowski.jpeg"
         />
       </div>
@@ -48,20 +48,20 @@ export default Home;
 
 /*
 <div>
-        <div className={styles.row}>
+        <div classNameName={styles.row}>
           <div>
             <img src={"https://prep.soyhenry.com/logo.png"} alt="" />{" "}
           </div>
-          <div classname={styles.Title}>
+          <div classNamename={styles.Title}>
             <h2>VideoGames app by Julian</h2>
           </div>
-          <div classname={styles.col}></div>
+          <div classNamename={styles.col}></div>
         </div>
         <hr />
       </div>
 
 
-      <div className="witcherImg">
+      <div classNameName="witcherImg">
           <img
             src={"https://images8.alphacoders.com/542/thumb-1920-542508.jpg"}
             alt=""
@@ -69,8 +69,8 @@ export default Home;
         </div>
 */
 /*
-<div className={`${styles.bigContainer}`}>
-        <div className="startButton">
+<div classNameName={`${styles.bigContainer}`}>
+        <div classNameName="startButton">
           <Link to="/catalog">
             <button onClick={handleOnClick}>{getData.buttonTitle}</button>
           </Link>

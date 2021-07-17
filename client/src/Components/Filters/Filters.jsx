@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { alphabeticFilter, noFilter, rankingFilter } from "../../Redux/actions";
 import "./Filters.css";
@@ -39,7 +39,7 @@ function Filters() {
   return (
     <>
       <select name="filter" onChange={handleOnChange} className="filter-select">
-        <option disabled="disabled" selected="selected">
+        <option disabled="disabled" defaultValue="selected">
           Choose a Filter
         </option>
         <option>{ALL}</option>

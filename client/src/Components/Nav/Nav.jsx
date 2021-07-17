@@ -6,14 +6,14 @@ function Nav() {
   return (
     <>
       <nav>
-        <div class="logo">
+        <div className="logo">
           <h4>Videogame ShowCase</h4>
         </div>
-        <ul class="nav-links">
-          <Link class="react-link" to="/">
+        <ul className="nav-links">
+          <Link className="react-link" to="/">
             <li>Home</li>
           </Link>
-          <Link class="react-link" to="/about">
+          <Link className="react-link" to="/about">
             <li>About</li>
           </Link>
         </ul>

@@ -15,7 +15,9 @@ function Game(props) {
             </div>
             <div>
               <p className="platforms">
-                {props.game.genres && props.game.genres.join(", ")}
+                {typeof props.game.id !== "number"
+                  ? props.game.genres.map((genre) => genre.name).join(", ")
+                  : props.game.genres && props.game.genres.join(", ")}
               </p>
             </div>
             <div>

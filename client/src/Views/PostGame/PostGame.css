@@ -1,0 +1,230 @@
+.add-game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  border: solid 1px rgb(192, 12, 12);
+}
+.selectors {
+  color: rgb(192, 12, 12);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+  list-style: none;
+}
+
+.selectors li {
+  background-color: rgb(32, 30, 30);
+  color: goldenrod;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
+  font-size: 15px;
+  list-style: none;
+}
+
+.selectors .list-selector :hover {
+  cursor: pointer;
+}
+.react-link {
+  text-decoration: none;
+  color: rgb(192, 12, 12);
+}
+.back-to-showcase {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.back-to-showcase button {
+  width: 300px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background: rgb(32, 31, 31);
+  color: rgb(192, 12, 12);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.4s;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+}
+
+.back-to-showcase button:hover {
+  border: solid 1px rgb(192, 12, 12);
+}
+
+title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 3%;
+  align-items: center;
+  color: rgb(192, 12, 12);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  border: solid 1px white;
+}
+
+.add-game .text-box {
+  position: relative;
+  margin-bottom: 5%;
+  background-color: rgb(32, 30, 30);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+}
+
+.add-game .text-box input,
+.add-game .text-box textarea {
+  margin-top: 2%;
+  width: 100%;
+  padding: 10px 0;
+  color: goldenrod;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-bottom: 1px solid rgb(192, 12, 12);
+  outline: none;
+  background: transparent;
+}
+.add-game .text-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: rgb(192, 12, 12);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.add-game .text-box input:focus ~ label,
+.add-game .text-box input:valid ~ label,
+.add-game .text-box textarea:focus ~ label,
+.add-game .text-box textarea:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: rgb(192, 12, 12);
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.add-game form button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: rgb(192, 12, 12);
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+  background-color: black;
+  border: solid 1px rgb(192, 12, 12);
+  border-radius: 5px;
+}
+
+.add-game button:hover {
+  background: black;
+  color: rgb(192, 12, 12);
+  border-radius: 5px;
+  box-shadow: 0 0 5px goldenrod, 0 0 25px goldenrod, 0 0 50px goldenrod,
+    0 0 100px goldenrod;
+}
+
+.add-game a span {
+  position: absolute;
+  display: block;
+}
+
+.add-game a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, black);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.add-game a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, black);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.add-game a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, black);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.add-game a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, black);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}

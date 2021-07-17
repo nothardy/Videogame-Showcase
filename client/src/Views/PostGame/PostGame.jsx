@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postGame } from "../../Redux/actions";
+import { getGames, postGame } from "../../Redux/actions";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 import ListSelector from "../../Components/ListSelector/ListSelector";
+import "./PostGame.css";
 
 const GAME_TEMPLATE = {
   name: "",
@@ -12,6 +14,7 @@ const GAME_TEMPLATE = {
   background_img: "",
   platforms: [],
   genres: [],
+  redirect: false,
 };
 const platforms = [
   { name: "PC" },
@@ -30,6 +33,7 @@ const platforms = [
 
 function PostGame() {
   const [game, setGame] = useState(GAME_TEMPLATE);
+  const [gameDataFullfilled, setGameDataFullfilled] = useState(false);
   const dbGenres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
 
@@ -47,19 +51,112 @@ function PostGame() {
       });
   };
 
+  // useEffect(() => {
+  //   if (game.redirect === true && gameDataFullfilled === false) {
+  //     setGame(GAME_TEMPLATE);
+  //     setGameDataFullfilled(true);
+  //   }
+  // }, [gameDataFullfilled]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     dispatch(postGame(game));
-    setGame(GAME_TEMPLATE);
+    dispatch(getGames());
+    setGame({
+      ...game,
+      redirect: true,
+    });
+    setGameDataFullfilled(true);
   };
 
-  return (
+  return gameDataFullfilled === true ? (
+    <Redirect to="/catalog" />
+  ) : (
     <>
-      <Link to="/catalog">
-        <button className="backtoshowcase">back To Showcase</button>
-      </Link>
+      <div className="back-to-showcase">
+        <Link className="react-link" to="/catalog">
+          <button>back To Showcase</button>
+        </Link>
+      </div>
+      <div class="add-game">
+        <form onSubmit={handleOnSubmit}>
+          <div class="text-box">
+            <input
+              type="text"
+              name="name"
+              value={game.name}
+              onChange={handleOnChange}
+            />
+            <label>Title</label>
+          </div>
+          <div class="text-box">
+            <textarea
+              type="description"
+              name="description"
+              value={game.description}
+              onChange={handleOnChange}
+            />
+            <label>Description</label>
+          </div>
+          <div class="text-box">
+            <input
+              type="date"
+              name="release_date"
+              value={game.release_date}
+              onChange={handleOnChange}
+            />
+            <label>Release Date</label>
+          </div>
+          <div class="text-box">
+            <input
+              type="text"
+              name="rating"
+              value={game.rating}
+              onChange={handleOnChange}
+            />
+            <label>Rating</label>
+          </div>
+          <div class="text-box">
+            <input
+              type="text"
+              name="background_img"
+              value={game.background_img}
+              onChange={handleOnChange}
+            />
+            <label>Background Image</label>
+          </div>
+          <div className="selectors">
+            <ListSelector
+              itemToSelect="platforms"
+              itemsList={platforms}
+              selectorHandler={handleOnChange}
+            />
+            {game.platforms.map((platform, index) => (
+              <li key={index}>{platform}</li>
+            ))}
+          </div>
+          <div className="selectors">
+            <ListSelector
+              className="list-selector"
+              itemToSelect="genres"
+              itemsList={dbGenres}
+              selectorHandler={handleOnChange}
+            />
+            {game.genres.map((genre, index) => (
+              <li key={index}>{genre}</li>
+            ))}
+          </div>
+          <button type="submit">Add Game</button>
+        </form>
+      </div>
+    </>
+  );
+}
 
-      <h3>Post Your Own Game!</h3>
+export default PostGame;
+
+/*
+<h3>Post Your Own Game!</h3>
       <form onSubmit={handleOnSubmit}>
         <label>Name</label>
         <input name="name" value={game.name} onChange={handleOnChange} />
@@ -105,11 +202,7 @@ function PostGame() {
         </>
         <button type="submit">Add Game</button>
       </form>
-    </>
-  );
-}
-
-export default PostGame;
+*/
 
 /*
 <input
