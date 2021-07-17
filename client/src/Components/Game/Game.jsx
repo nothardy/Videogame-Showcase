@@ -14,10 +14,10 @@ function Game(props) {
               <p>{props.game.name}</p>
             </div>
             <div>
-              <p className="platforms">
-                {typeof props.game.id !== "number"
+              <p className="genres">
+                {typeof props.game.id !== "number" && props.game.genres
                   ? props.game.genres.map((genre) => genre.name).join(", ")
-                  : props.game.genres && props.game.genres.join(", ")}
+                  : props.game.genres.join(", ")}
               </p>
             </div>
             <div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   removeSearchedGamesByName,
@@ -16,7 +16,9 @@ function SearchBar(props) {
     if (props.reset == true) dispatch(removeSearchedGamesByName);
     if (game.charAt(0) == "") dispatch(removeSearchedGamesByName());
   };
-
+  useEffect(() => {
+    if (props.reset == true) setGame("");
+  }, [props.reset]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(searchGameByName(game));
