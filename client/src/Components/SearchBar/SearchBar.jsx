@@ -19,6 +19,7 @@ function SearchBar(props) {
   useEffect(() => {
     if (props.reset == true) setGame("");
   }, [props.reset]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(searchGameByName(game));

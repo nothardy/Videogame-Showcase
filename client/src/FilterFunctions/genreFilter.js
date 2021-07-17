@@ -8,6 +8,7 @@ export const genreFilter = (gamesToFilter, genresToFilter, lastFilter) => {
           if (genreToFilter == "From Db" && typeof game.id !== "number")
             return game;
           else if (genre === genreToFilter) return game;
+          else if (genre.name === genreToFilter) return game;
         }
       }
     }
