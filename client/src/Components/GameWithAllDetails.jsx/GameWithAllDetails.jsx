@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import styles from "./GameWithAllDetails.module.css";
+import "./GameWithAllDetails.css";
 
 function GameWithAllDetails(props) {
   const [readMore, setReadMore] = useState(false);
-  let header = "Description: ";
 
   const setInnerHtml = (description) => {
-    if (readMore === false) {
-      description = header.concat(description).slice(0, 60);
-    } else {
-      description = header.concat(description);
+    if (readMore === true) {
       return { __html: description };
     }
   };
 
-  const linkName = readMore ? "Hide Description <<" : "See Description >>";
+  const linkName = readMore ? "<< Hide Description " : "<< See Description ";
 
   const handleOnClick = () => {
     setReadMore(!readMore);
@@ -22,62 +18,67 @@ function GameWithAllDetails(props) {
 
   return (
     <>
-      <div className={`${styles.row}`}>
-        <div className={`${styles.gameContainer}`}>
-          <div className={`${styles.row}`}>
+      <div className="details-row">
+        <div className="details-game-container">
+          <div className="details-row">
             <div>
               <img
-                className={`${styles.gameImg}`}
+                className="details-game-img"
                 src={props.game.background_img}
               />
             </div>
-            <div className={`${styles.gameInfo}`}>
+            <div className="details-game-description">
+              <div
+                className="info-titles"
+                dangerouslySetInnerHTML={setInnerHtml("Description")}
+              ></div>
+              <div
+                dangerouslySetInnerHTML={setInnerHtml(props.game.description)}
+              ></div>
+            </div>
+            <div className="details-game-info">
               <div>
-                <p>
-                  Name:
+                <p className="info-titles">Name:</p>
+                <p className="info-data">
                   <br />
                   {props.game.name}
                 </p>
               </div>
               <div>
-                <p>
-                  Genres:
+                <p className="info-titles">Genres:</p>
+                <p className="info-data">
                   <br />
                   {props.game.genres && props.game.genres.join(", ")}
                 </p>
               </div>
               <div>
-                <p>
-                  Rating:
+                <p className="info-titles">Rating:</p>
+                <p className="info-data">
                   <br />
                   {props.game.rating}
                 </p>
               </div>
               <div>
-                <p>
-                  Platforms: <br />
+                <p className="info-titles">Platforms:</p>
+                <p className="info-data">
+                  <br />
                   {props.game.platforms && props.game.platforms.join(", ")}
                 </p>
               </div>
               <div>
-                <p>
-                  Release Date:
+                <p className="info-titles">Release Date:</p>
+                <p className="info-data">
                   <br />
                   {props.game.release_date}
                 </p>
               </div>
               <div>
-                <a className="read-more-link" onClick={handleOnClick}>
+                <a className="details-read-more-link" onClick={handleOnClick}>
                   <p>{linkName}</p>
                 </a>
               </div>
             </div>
           </div>
-        </div>
-        <div className={`${styles.gameContainer}`}>
-          <div
-            dangerouslySetInnerHTML={setInnerHtml(props.game.description)}
-          ></div>
         </div>
       </div>
     </>

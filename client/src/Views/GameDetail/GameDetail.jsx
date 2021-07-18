@@ -4,6 +4,7 @@ import GameWithAllDetails from "../../Components/GameWithAllDetails.jsx/GameWith
 import { getGameDetails, removeGameDetails } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import "./GameDetails.css";
 
 function GameDetail() {
   let gameDetails = useSelector((state) => state.gameDetails);
@@ -26,8 +27,10 @@ function GameDetail() {
 
   return (
     <>
-      <Link to="/catalog" style={{ textDecoration: "none" }}>
-        <button className="backtoshowcase">back To Showcase</button>
+      <Link className="react-link" to="/catalog">
+        <div className="back-to-showcase">
+          <button>back To Showcase</button>
+        </div>
       </Link>
       <GameWithAllDetails game={gameDetails} onClick={handleOnClick} />
     </>

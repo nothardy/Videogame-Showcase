@@ -1,0 +1,91 @@
+.details-game-container {
+  /* ;
+    width: 600px;
+    padding: 10px;
+    margin: 20px;
+    background-color: grey;
+    opacity: 90%;
+    border-radius: 8.09px; */
+  border: 2px solid black;
+  opacity: 90%;
+  margin: 1rem 1rem;
+  border-radius: 10px;
+  height: max-content;
+  font-size: 14px;
+  color: rgb(192, 12, 12);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: inherit;
+}
+
+.details-game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  min-width: 40%;
+  max-width: 50%;
+}
+
+.details-game-info div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.details-game-info .info-titles,
+.details-game-description .info-titles {
+  color: rgb(192, 12, 12);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+}
+
+.details-game-info .info-data {
+  font-family: "Poppins", sans-serif;
+  color: goldenrod;
+}
+
+.details-game-img {
+  /* max-width: 100%;
+    max-height: 100%;
+    display: block; */
+  height: 25rem;
+  width: 25rem;
+  margin: 0.5 rem;
+  border-radius: 5px;
+  box-shadow: 20px 20px 30px #292929;
+}
+
+.details-game-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  text-overflow: ellipsis;
+  max-width: 40%;
+}
+.details-game-description div {
+  color: goldenrod;
+  padding-left: 20%;
+  padding-right: 3%;
+  text-align: justify;
+}
+
+.details-read-more-link:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: transparent;
+  box-shadow: 0 10px 10px -6px goldenrod;
+}
+
+/* 0 10px 10px -5px*/
