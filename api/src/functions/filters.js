@@ -106,20 +106,21 @@ const getDbGames = async (gameName) => {
       ],
     });
     if (dbGames.length > 0) return dbGames;
-  }
-  const dbGames = await Game.findAll({
-    include: [
-      {
-        model: Genre,
-        as: "genres",
-        attributes: ["id", "name"],
-        through: {
-          attributes: [],
+  } else {
+    const dbGames = await Game.findAll({
+      include: [
+        {
+          model: Genre,
+          as: "genres",
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
+          },
         },
-      },
-    ],
-  });
-  if (dbGames.length > 0) return dbGames;
+      ],
+    });
+    if (dbGames.length > 0) return dbGames;
+  }
 };
 
 const get100Games = async (api, manyGames = false) => {

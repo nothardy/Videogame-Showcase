@@ -5,16 +5,18 @@ var db = new Sequelize(
   `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
   { logging: false, native: false }
 );
-const { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT } = Sequelize.DataTypes;
+const { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT, BOOLEAN } =
+  Sequelize.DataTypes;
 
 const Game = db.define("game", {
   id: { type: UUID, allowNull: false, primaryKey: true },
   name: { type: STRING, allowNull: false },
   description: { type: TEXT, allowNull: false },
-  release_date: { type: STRING, allowNull: false }, // CAMBIAR DESPUES A DATEONLY
-  background_img: { type: TEXT },
+  release_date: { type: STRING, allowNull: false },
+  background_img: { type: STRING },
   rating: { type: STRING, allowNull: false },
   platforms: { type: ARRAY(TEXT), allowNull: false },
+  fromDb: { type: BOOLEAN },
 });
 
 const Genre = db.define("genre", {

@@ -184,15 +184,16 @@ const postGameIntoDb = async (req, res, next) => {
       platforms,
       genres,
     } = req.body;
-    console.log(name, platforms);
+    let fromDb = true;
     const game = await Game.create({
       id: uuidv4(),
       name,
       description,
       release_date,
-      rating,
       background_img,
+      rating,
       platforms,
+      fromDb,
     });
     genres.forEach(async (genre) => {
       let genreThatMatchesDb = await Genre.findOne({
