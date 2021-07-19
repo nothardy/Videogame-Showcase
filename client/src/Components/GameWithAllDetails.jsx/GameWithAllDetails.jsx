@@ -22,14 +22,25 @@ function GameWithAllDetails(props) {
         <div className="details-game-container">
           <div className="details-row">
             <div>
-              <img
-                className="details-game-img"
-                src={props.game.background_img}
-              />
+              {props.game.background_img &&
+              (props.game.background_img.includes(".jpg") ||
+                props.game.background_img.includes(".png")) ? (
+                <img
+                  className="details-game-img"
+                  src={props.game.background_img}
+                  alt="image Missing"
+                />
+              ) : (
+                <img
+                  className="details-game-img"
+                  src={"https://assets.soyhenry.com/logoOG.png"}
+                  alt="Image Missing"
+                />
+              )}
             </div>
             <div className="details-game-description">
               <div
-                className="info-titles"
+                className="info-title"
                 dangerouslySetInnerHTML={setInnerHtml("Description")}
               ></div>
               <div

@@ -14,9 +14,9 @@ function Home() {
 
   const handleOnClick = async () => {
     if (getData.dataAlreadyFetched === false) {
-      dispatch(getFewGames());
-      dispatch(getGenres());
-      dispatch(getGames());
+      // dispatch(getFewGames());
+      // dispatch(getGenres());
+      // dispatch(getGames());
       setGetData({
         ...getData,
         dataAlreadyFetched: true,

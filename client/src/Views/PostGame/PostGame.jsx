@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGames, postGame } from "../../Redux/actions";
 import { Link } from "react-router-dom";
@@ -78,9 +78,9 @@ function PostGame() {
           <button>back To Showcase</button>
         </Link>
       </div>
-      <div class="add-game">
+      <div className="add-game">
         <form onSubmit={handleOnSubmit}>
-          <div class="text-box">
+          <div className="text-box">
             <input
               type="text"
               name="name"
@@ -89,7 +89,7 @@ function PostGame() {
             />
             <label>Title</label>
           </div>
-          <div class="text-box">
+          <div className="text-box">
             <textarea
               type="description"
               name="description"
@@ -98,7 +98,7 @@ function PostGame() {
             />
             <label>Description</label>
           </div>
-          <div class="text-box">
+          <div className="text-box">
             <input
               type="date"
               name="release_date"
@@ -107,7 +107,7 @@ function PostGame() {
             />
             <label>Release Date</label>
           </div>
-          <div class="text-box">
+          <div className="text-box">
             <input
               type="text"
               name="rating"
@@ -116,7 +116,7 @@ function PostGame() {
             />
             <label>Rating</label>
           </div>
-          <div class="text-box">
+          <div className="text-box">
             <input
               type="text"
               name="background_img"

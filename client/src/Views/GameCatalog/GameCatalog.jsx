@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import {
-  get20Games,
+  getFewGames,
   getGames,
+  getGenres,
   removeSearchedGamesByName,
 } from "../../Redux/actions";
 import { Link } from "react-router-dom";
-import Showcase from "../../Components/Showcase/Showcase";
 import Game from "../../Components/Game/Game";
 import "./GameCatalog.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -42,11 +42,13 @@ export function GameCatalog(props) {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [resetFlag, setResetFlag] = useState(false);
   const [shownGames, setShownGames] = useState(fewGames);
+  const [firstRender, setFirstRender] = useState(true);
 
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
 
+  let errorFlag, errorMsg;
   const pages = [];
   const paginate = (shownGames) => {
     for (let i = 1; i <= Math.ceil(shownGames.length / itemsPerPage); i++)
@@ -81,9 +83,17 @@ export function GameCatalog(props) {
   };
 
   useEffect(async () => {
-    //if(!twentyGames>0)dispatch(get20Games)
-    if (!games.length > 0) dispatch(getGames);
+    if (firstRender === true) {
+      await dispatch(getFewGames());
+      dispatch(getGenres());
+      dispatch(getGames());
+      setFirstRender(false);
+    }
     if (gamesFiltered.length > 0) {
+      if (gamesFiltered.length === 1 && gamesFiltered[0].error) {
+        errorFlag = true;
+        errorMsg = gamesFiltered[0].error;
+      } else errorFlag = false;
       await setShownGames(gamesFiltered);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else if (gamesByName.length > 0) {
@@ -127,7 +137,6 @@ export function GameCatalog(props) {
           </button>
           Filter By Genre:{resetFlag == false && <GenreAndDbFilter />}
         </div>
-
         <div className="game-container-catalog">
           {renderGames(currentItems)}
         </div>
