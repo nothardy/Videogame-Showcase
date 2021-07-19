@@ -47,7 +47,6 @@ describe("Testing ---> Routes", () => {
     });
   });
 
-  // My Test:
   describe("GET /videogames?name", () => {
     it("should get 200 status and return first 15 games from API matching query name ", () => {
       agent

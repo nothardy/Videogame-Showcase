@@ -3,27 +3,6 @@ const { expect } = require("chai");
 const { v4: uuidv4 } = require("uuid");
 const { Op } = require("sequelize");
 
-// describe("Videogame model", () => {
-//   before(() =>
-//     db.authenticate().catch((err) => {
-//       console.error("Unable to connect to the database:", err);
-//     })
-//   );
-//   describe("Validators", () => {
-//     beforeEach(() => Game.sync({ force: true }));
-//     describe("name", () => {
-//       it("should throw an error if name is null", (done) => {
-//         Game.create({})
-//           .then(() => done(new Error("It requires a valid name")))
-//           .catch(() => done());
-//       });
-//       it("should work when its a valid name", () => {
-//         Game.create({ name: "Super Mario Bros" });
-//       });
-//     });
-//   });
-// });
-
 const videogame = {
   name: "Testing the integrity of my life, I mean, my PI",
   id: uuidv4(),
@@ -97,7 +76,6 @@ describe("TEST ---> Game Db Model", () => {
     });
   });
 
-  //My test:
   describe("Genre Db Model", () => {
     beforeEach(() => Genre.sync({ force: true }));
     describe("Validation", () => {
