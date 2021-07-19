@@ -29,14 +29,14 @@ function GenreAndDbFilter() {
     <>
       <div className="genre-checkbox">
         <div className="db-checkbox">
-          <div>{"From Db "}</div>
+          <div className="genres-text">{"From Db "}</div>
           <div>
             <Checkbox key={20} value={"From Db"} onChange={handleOnChange} />
           </div>
         </div>
         {genres.map((genre) => (
           <div key={genre.id} className="genre-container">
-            <div>{genre.name + " "}</div>
+            <div className="genres-text">{genre.name + " "}</div>
             <div>
               <Checkbox
                 key={genre.id}

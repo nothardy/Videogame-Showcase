@@ -13,11 +13,11 @@ function SearchBar(props) {
   const handleChange = async (e) => {
     console.log(e.target.value);
     await setGame(e.target.value);
-    if (props.reset == true) dispatch(removeSearchedGamesByName);
-    if (game.charAt(0) == "") dispatch(removeSearchedGamesByName());
+    if (props.reset === true) dispatch(removeSearchedGamesByName);
+    if (game.charAt(0) === "") dispatch(removeSearchedGamesByName());
   };
   useEffect(() => {
-    if (props.reset == true) setGame("");
+    if (props.reset === true) setGame("");
   }, [props.reset]);
 
   const handleSubmit = async (e) => {

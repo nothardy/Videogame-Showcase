@@ -6,7 +6,9 @@
   justify-content: space-evenly;
   height: 80%;
 }
-
+.genres-text {
+  color: goldenrod;
+}
 .db-checkbox,
 .genre-container {
   display: flex;

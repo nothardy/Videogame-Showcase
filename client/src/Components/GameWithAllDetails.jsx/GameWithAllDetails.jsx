@@ -28,19 +28,19 @@ function GameWithAllDetails(props) {
                 <img
                   className="details-game-img"
                   src={props.game.background_img}
-                  alt="image Missing"
+                  alt="Missing"
                 />
               ) : (
                 <img
                   className="details-game-img"
                   src={"https://assets.soyhenry.com/logoOG.png"}
-                  alt="Image Missing"
+                  alt="Missing"
                 />
               )}
             </div>
             <div className="details-game-description">
               <div
-                className="info-title"
+                className="info-titles"
                 dangerouslySetInnerHTML={setInnerHtml("Description")}
               ></div>
               <div
@@ -84,9 +84,12 @@ function GameWithAllDetails(props) {
                 </p>
               </div>
               <div>
-                <a className="details-read-more-link" onClick={handleOnClick}>
+                <button
+                  className="details-read-more-link"
+                  onClick={handleOnClick}
+                >
                   <p>{linkName}</p>
-                </a>
+                </button>
               </div>
             </div>
           </div>

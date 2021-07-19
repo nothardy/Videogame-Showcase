@@ -81,7 +81,14 @@
   text-align: justify;
 }
 
+.details-read-more-link {
+  background-color: transparent;
+  color: rgb(192, 12, 12);
+  border: none;
+}
+
 .details-read-more-link:hover {
+  color: rgb(192, 12, 12);
   cursor: pointer;
   border-radius: 5px;
   background-color: transparent;

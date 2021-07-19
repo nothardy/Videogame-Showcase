@@ -12,12 +12,15 @@ function GameDetail() {
   let { gameId } = useParams();
   const [fetchedDetails, setFetchedDetails] = useState(false);
 
-  useEffect(async () => {
-    if (fetchedDetails == false) {
-      await dispatch(getGameDetails(gameId));
+  useEffect(() => {
+    if (fetchedDetails === false) {
+      async function dispatches() {
+        await dispatch(getGameDetails(gameId));
+      }
+      dispatches();
       setFetchedDetails(true);
     }
-  }, [gameId]);
+  }, [gameId, dispatch, fetchedDetails]);
 
   const handleOnClick = (e) => {
     if (gameId !== gameDetails.id) {

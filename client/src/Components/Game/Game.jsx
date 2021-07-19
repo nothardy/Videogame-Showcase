@@ -13,13 +13,13 @@ function Game(props) {
               <img
                 className="game-img"
                 src={props.game.background_img}
-                alt="image Missing"
+                alt="Missing"
               />
             ) : (
               <img
                 className="game-img"
                 src={"https://assets.soyhenry.com/logoOG.png"}
-                alt="Image Missing"
+                alt="Missing"
               />
             )}
           </div>

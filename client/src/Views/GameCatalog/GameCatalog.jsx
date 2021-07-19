@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector, connect } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import {
   getFewGames,
   getGames,
@@ -20,7 +20,7 @@ const renderGames = (games) => {
     <div className="showcase">
       {games.map((game, index) => {
         return (
-          <div key={index}>
+          <div className="game-box" key={index}>
             <Link className="react-link" to={`/catalog/${game.id}`}>
               <Game game={game} />
             </Link>
@@ -39,7 +39,7 @@ export function GameCatalog(props) {
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, _setItemsPerPage] = useState(10);
   const [resetFlag, setResetFlag] = useState(false);
   const [shownGames, setShownGames] = useState(fewGames);
   const [firstRender, setFirstRender] = useState(true);
@@ -63,7 +63,7 @@ export function GameCatalog(props) {
     let renderPageNumbers = pages.map((number) => {
       return (
         <li
-          className={currentPage == number ? "active" : null}
+          className={currentPage === number ? "active" : null}
           key={number}
           id={number}
           onClick={handleClick}
@@ -82,28 +82,32 @@ export function GameCatalog(props) {
     dispatch(removeSearchedGamesByName());
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (firstRender === true) {
-      await dispatch(getFewGames());
-      dispatch(getGenres());
-      dispatch(getGames());
-      setFirstRender(false);
+      async function dispatches() {
+        await dispatch(getFewGames());
+        dispatch(getGenres());
+        dispatch(getGames());
+        setFirstRender(false);
+      }
+      dispatches();
     }
+
     if (gamesFiltered.length > 0) {
-      if (gamesFiltered.length === 1 && gamesFiltered[0].error) {
-        errorFlag = true;
-        errorMsg = gamesFiltered[0].error;
-      } else errorFlag = false;
-      await setShownGames(gamesFiltered);
+      // if (gamesFiltered.length === 1 && gamesFiltered[0].error) {
+      //   errorFlag = true;
+      //   errorMsg = gamesFiltered[0].error;
+      // } else errorFlag = false;
+      setShownGames(gamesFiltered);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else if (gamesByName.length > 0) {
-      await setShownGames(gamesByName);
+      setShownGames(gamesByName);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else if (games.length > 0) {
-      await setShownGames(props.games);
+      setShownGames(props.games);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else {
-      await setShownGames(props.fewGames);
+      setShownGames(props.fewGames);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     }
 
@@ -135,7 +139,7 @@ export function GameCatalog(props) {
           <button className="reset-name-button" onClick={handleReset}>
             Reset Filters
           </button>
-          Filter By Genre:{resetFlag == false && <GenreAndDbFilter />}
+          Filter By Genre:{resetFlag === false && <GenreAndDbFilter />}
         </div>
         <div className="game-container-catalog">
           {renderGames(currentItems)}

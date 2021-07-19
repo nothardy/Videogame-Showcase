@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styles from "./Home.module.css";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getFewGames, getGames, getGenres } from "../../Redux/actions";
-import { useDispatch } from "react-redux";
 import "./Home.css";
 
 function Home() {
@@ -10,7 +7,6 @@ function Home() {
     dataAlreadyFetched: false,
     buttonTitle: "Get Started",
   });
-  const dispatch = useDispatch();
 
   const handleOnClick = async () => {
     if (getData.dataAlreadyFetched === false) {
@@ -38,6 +34,7 @@ function Home() {
         <img
           className="img"
           src="https://areajugones.sport.es/wp-content/uploads/2019/02/The-Witcher-Sapkowski.jpeg"
+          alt="Missing"
         />
       </div>
     </>

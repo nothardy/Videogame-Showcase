@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import "./ListSelector.css";
 
 function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
-  const [selectorErrorHandler, setSelectorErrorHandler] = useState({
-    errorMsg: "Error: You must select an item",
-    errorFlag: true,
-  });
+  //   const [selectorErrorHandler, setSelectorErrorHandler] = useState({
+  //     errorMsg: "Error: You must select an item",
+  //     errorFlag: true,
+  //   });
 
-  const handleChange = (e) => {
-    if (itemToSelect == "platforms" && e.target.value.length > 2) {
-      setSelectorErrorHandler({
-        errorFlag: false,
-        errorMsg: "",
-      });
-    } else if (itemToSelect == "genres" && e.target.value.length >= 1) {
-      setSelectorErrorHandler({
-        errorFlag: false,
-        errorMsg: "",
-      });
-    }
-  };
+  //   const handleChange = (e) => {
+  //     if (itemToSelect === "platforms" && e.target.value.length > 2) {
+  //       setSelectorErrorHandler({
+  //         errorFlag: false,
+  //         errorMsg: "",
+  //       });
+  //     } else if (itemToSelect === "genres" && e.target.value.length >= 1) {
+  //       setSelectorErrorHandler({
+  //         errorFlag: false,
+  //         errorMsg: "",
+  //       });
+  //     }
+  //   };
 
   return (
     <>
@@ -28,7 +28,6 @@ function ListSelector({ itemToSelect, itemsList, selectorHandler }) {
         <select
           className="list-selector"
           name={itemToSelect}
-          onChange={handleChange}
           onInput={selectorHandler}
         >
           <option>----</option>
