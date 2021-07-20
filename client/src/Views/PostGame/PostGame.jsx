@@ -79,7 +79,7 @@ function PostGame() {
         </Link>
       </div>
       <div className="add-game">
-        <form onSubmit={handleOnSubmit}>
+        <form data-testid="postgame" onSubmit={handleOnSubmit}>
           <div className="text-box">
             <input
               type="text"
@@ -146,7 +146,9 @@ function PostGame() {
               <li key={index}>{genre}</li>
             ))}
           </div>
-          <button type="submit">Add Game</button>
+          <button data-testid="submit-button" type="submit">
+            Add Game
+          </button>
         </form>
       </div>
     </>

@@ -10,7 +10,7 @@ import GameDetail from "./Views/GameDetail/GameDetail";
 
 function App() {
   return (
-    <>
+    <div>
       <Nav />
       <Route path="/" exact>
         <Home />
@@ -24,7 +24,7 @@ function App() {
       <Route path="/postgame" exact>
         <PostGame />
       </Route>
-    </>
+    </div>
   );
 }
 
