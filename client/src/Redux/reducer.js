@@ -104,7 +104,7 @@ const reducer = (state = initialState, action) => {
     }
 
     case FILTER_BY_GENRE: {
-      let gamesToFilter = gamesToFilterDeclaration(state, action.payload);
+      let gamesToFilter = gamesToFilterDeclaration(state);
       return {
         ...state,
         gamesFiltered: genreFilter(
