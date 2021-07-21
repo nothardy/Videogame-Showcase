@@ -13,7 +13,6 @@ import {
   filterByGenre,
   rankingFilter,
 } from "./Redux/actions";
-import { genreFilter } from "./FilterFunctions/genreFilter";
 
 configure({ adapter: new Adapter() });
 

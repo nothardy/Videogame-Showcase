@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import {
@@ -12,25 +13,32 @@ import "./GameCatalog.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Filters from "../../Components/Filters/Filters";
 import GenreAndDbFilter from "../../Components/Filters/Genre&DbFilter";
-
-// PAGINATION OCCURS HERE
+import NotFound from "../../Components/NotFound/NotFound";
 
 const renderGames = (games) => {
-  return (
-    <div className="showcase">
-      {games.map((game, index) => {
-        return (
-          <div className="game-box" key={index}>
-            <Link className="react-link" to={`/catalog/${game.id}`}>
-              <Game game={game} />
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
+  if (games.length === 1 && games[0].error) {
+    return (
+      <div className="showcase">
+        <NotFound games={games[0]} />
+      </div>
+    );
+  } else
+    return (
+      <div className="showcase">
+        {games.map((game, index) => {
+          return (
+            <div className="game-box" key={index}>
+              <Link className="react-link" to={`/catalog/${game.id}`}>
+                <Game game={game} />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    );
 };
 
+// COMPONENT
 export function GameCatalog(props) {
   let games = props.games;
   let gamesByName = props.gamesByName;
@@ -39,7 +47,7 @@ export function GameCatalog(props) {
   const dispatch = useDispatch();
   //React Hooks
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, _setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
   const [resetFlag, setResetFlag] = useState(false);
   const [shownGames, setShownGames] = useState(fewGames);
   const [firstRender, setFirstRender] = useState(true);
@@ -48,7 +56,6 @@ export function GameCatalog(props) {
     setCurrentPage(Number(event.target.id));
   };
 
-  let errorFlag, errorMsg;
   const pages = [];
   const paginate = (shownGames) => {
     for (let i = 1; i <= Math.ceil(shownGames.length / itemsPerPage); i++)
@@ -94,10 +101,6 @@ export function GameCatalog(props) {
     }
 
     if (gamesFiltered.length > 0) {
-      // if (gamesFiltered.length === 1 && gamesFiltered[0].error) {
-      //   errorFlag = true;
-      //   errorMsg = gamesFiltered[0].error;
-      // } else errorFlag = false;
       setShownGames(gamesFiltered);
       [renderPageNumbers, currentItems] = paginate(shownGames);
     } else if (gamesByName.length > 0) {

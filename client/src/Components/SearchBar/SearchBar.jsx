@@ -11,7 +11,6 @@ function SearchBar(props) {
   const dispatch = useDispatch();
 
   const handleChange = async (e) => {
-    console.log(e.target.value);
     await setGame(e.target.value);
     if (props.reset === true) dispatch(removeSearchedGamesByName);
     if (game.charAt(0) === "") dispatch(removeSearchedGamesByName());

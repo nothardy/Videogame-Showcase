@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const genreFilter = (gamesToFilter, genresToFilter, lastFilter) => {
   //   if (genresToFilter.length <= 0) return lastFilter;
   //   let filteredGames = gamesToFilter.map((game) => {

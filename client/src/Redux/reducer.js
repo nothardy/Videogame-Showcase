@@ -54,10 +54,13 @@ const reducer = (state = initialState, action) => {
         games: [...state.games, action.payload],
       };
     case SEARCH_GAME_BY_NAME:
-      return {
-        ...state,
-        gamesByName: action.payload,
-      };
+      if (Array.isArray(action.payload))
+        return { ...state, gamesFiltered: action.payload };
+      else
+        return {
+          ...state,
+          gamesByName: [action.payload],
+        };
     case GET_GENRES:
       return {
         ...state,
