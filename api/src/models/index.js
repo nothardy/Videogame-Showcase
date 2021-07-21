@@ -1,12 +1,13 @@
-var Sequelize = require("sequelize");
 require("dotenv").config();
-const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env;
-var db = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-  { logging: false, native: false }
-);
-const { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT, BOOLEAN } =
-  Sequelize.DataTypes;
+var Sequelize = require("sequelize");
+
+const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env,
+  db = new Sequelize(
+    `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+    { logging: false, native: false }
+  ),
+  { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT, BOOLEAN } =
+    Sequelize.DataTypes;
 
 const Game = db.define("game", {
   id: { type: UUID, allowNull: false, primaryKey: true },
@@ -41,6 +42,4 @@ Genre.belongsToMany(Game, {
   foreignKey: "genreId",
 });
 
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
 module.exports = { Game, Genre, db };

@@ -2,24 +2,6 @@ const { default: axios } = require("axios");
 const { Game, Genre } = require("../models/index");
 const { Op } = require("sequelize");
 
-const filterGameDetailsDeprecated = (fetchedApiObject) => {
-  return (fetchedApiObject = fetchedApiObject.data.results.map((game) => {
-    return (game = {
-      id: game.id,
-      name: game.name,
-      release_date: game.released,
-      rating: game.rating,
-      background_img: game.background_image,
-      genres: game.genres.map((genre) => {
-        return genre.name;
-      }),
-      platforms: game.parent_platforms.map((platform) => {
-        return platform.platform.name;
-      }),
-    });
-  }));
-};
-
 const filterGameDetails = (fetchedGames) => {
   return (fetchedGames = fetchedGames.map((game) => {
     return (game = {
@@ -46,20 +28,6 @@ const filterGameDetails = (fetchedGames) => {
     });
   }));
 };
-
-// (() => {
-//   if (game.genres)
-//   game.genres.map((genre) => {
-//     return genre.name;
-//   });
-// })()
-
-// (() => {
-//   if (game.parent_platforms)
-//     game.parent_platforms.map((platform) => {
-//       return platform.platform.name;
-//     });
-// })(),
 
 const specificGameDetails = (game) => {
   game = game.data;
