@@ -34,9 +34,13 @@ const platforms = [
 function PostGame() {
   const [game, setGame] = useState(GAME_TEMPLATE);
   const [gameDataFullfilled, setGameDataFullfilled] = useState(false);
+  const [validationError, setValidationError] = useState({
+    errorMsg: "Mandatory fields missing",
+    readyToPost: false,
+  });
   const dbGenres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
-
+  let readyToPost = false;
   const handleOnChange = (e) => {
     if (e.target.name === "genres") {
       setGame({ ...game, genres: [...game.genres, e.target.value] });
@@ -44,29 +48,39 @@ function PostGame() {
     } else if (e.target.name === "platforms") {
       setGame({ ...game, platforms: [...game.platforms, e.target.value] });
       e.target.value = "";
-    } else
+    } else {
       setGame({
         ...game,
         [e.target.name]: e.target.value,
       });
+    }
   };
-
-  // useEffect(() => {
-  //   if (game.redirect === true && gameDataFullfilled === false) {
-  //     setGame(GAME_TEMPLATE);
-  //     setGameDataFullfilled(true);
-  //   }
-  // }, [gameDataFullfilled]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    dispatch(postGame(game));
-    dispatch(getGames());
-    setGame({
-      ...game,
-      redirect: true,
-    });
-    setGameDataFullfilled(true);
+    let requirementChecker = 0;
+    for (let requirement of Object.values(game)) {
+      if (requirement.length === 0 && requirement !== "background_img")
+        requirementChecker++;
+    }
+    if (requirementChecker === 0) {
+      setValidationError({
+        ...validationError,
+        readyToPost: true,
+      });
+      readyToPost = true;
+    }
+    if (readyToPost === true) {
+      dispatch(postGame(game));
+      dispatch(getGames());
+      setGame({
+        ...game,
+        redirect: true,
+      });
+      setGameDataFullfilled(true);
+    } else {
+      alert(validationError.errorMsg);
+    }
   };
 
   return gameDataFullfilled === true ? (
@@ -87,7 +101,9 @@ function PostGame() {
               value={game.name}
               onChange={handleOnChange}
             />
-            <label>Title</label>
+            <label>
+              Title <p>{validationError.name}</p>
+            </label>
           </div>
           <div className="text-box">
             <textarea

@@ -5,7 +5,7 @@ function NotFound(props) {
   return (
     <>
       <div className="error-msg">
-        <h4>{props.games.error}</h4>
+        <h4 className="h4-error">{props.games.error}</h4>
       </div>
     </>
   );

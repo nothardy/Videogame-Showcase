@@ -59,7 +59,11 @@ function GameWithAllDetails(props) {
                 <p className="info-titles">Genres:</p>
                 <p className="info-data">
                   <br />
-                  {props.game.genres && props.game.genres.join(", ")}
+                  {typeof props.game.id !== "number" && props.game.genres
+                    ? props.game.genres.map((genre) => genre.name).join(", ")
+                    : props.game.genres && props.game.genres.length > 0
+                    ? props.game.genres.join(", ")
+                    : null}
                 </p>
               </div>
               <div>

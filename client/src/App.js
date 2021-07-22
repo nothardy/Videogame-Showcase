@@ -7,6 +7,7 @@ import GameCatalog from "./Views/GameCatalog/GameCatalog";
 import Nav from "./Components/Nav/Nav";
 import PostGame from "./Views/PostGame/PostGame";
 import GameDetail from "./Views/GameDetail/GameDetail";
+import About from "./Views/About/About";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
       </Route>
       <Route path="/postgame" exact>
         <PostGame />
+      </Route>
+      <Route path="/about">
+        <About />
       </Route>
     </div>
   );

@@ -127,7 +127,7 @@ export function GameCatalog(props) {
             <SearchBar reset={resetFlag} />
           </div>
           <div className="filter">
-            Filter By
+            Order By
             <Filters />
           </div>
         </div>
