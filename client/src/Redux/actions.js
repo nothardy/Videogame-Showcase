@@ -43,8 +43,6 @@ export function postGame(game) {
   };
 }
 
-//headers: { "Content-Type": "text/plain" }
-
 export function searchGameByName(game) {
   return (dispatch) => {
     axios

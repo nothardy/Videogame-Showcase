@@ -38,14 +38,13 @@ const renderGames = (games) => {
     );
 };
 
-// COMPONENT
 export function GameCatalog(props) {
   let games = props.games;
   let gamesByName = props.gamesByName;
   let gamesFiltered = props.gamesFiltered;
   let fewGames = props.fewGames;
   const dispatch = useDispatch();
-  //React Hooks
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [resetFlag, setResetFlag] = useState(false);
@@ -115,8 +114,6 @@ export function GameCatalog(props) {
     }
 
     if (resetFlag === true) setResetFlag(false);
-
-    //if (gamesByName.length > 0) games = gamesByName;
   }, [dispatch, fewGames, games, gamesByName, gamesFiltered, resetFlag]);
 
   return (
@@ -163,5 +160,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(GameCatalog);
-
-/* <h3 className="title">Games</h3> */

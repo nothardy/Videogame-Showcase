@@ -104,8 +104,3 @@ function GameWithAllDetails(props) {
 }
 
 export default GameWithAllDetails;
-
-/*
-{(() => {
-                  if (props.game.description) parser(props.game.description);
-                })()} */

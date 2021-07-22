@@ -55,7 +55,11 @@ const reducer = (state = initialState, action) => {
       };
     case SEARCH_GAME_BY_NAME:
       if (Array.isArray(action.payload))
-        return { ...state, gamesFiltered: action.payload };
+        return {
+          ...state,
+          gamesFiltered: action.payload,
+          lastFilter: action.payload,
+        };
       else
         return {
           ...state,
@@ -78,6 +82,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         gamesByName: [],
         gamesFiltered: [],
+        lastFilter: [],
       };
 
     case REMOVE_GAME_DETAILS:

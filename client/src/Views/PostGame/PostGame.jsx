@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getGames, postGame } from "../../Redux/actions";
+import { getGames, getGenres, postGame } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
 import ListSelector from "../../Components/ListSelector/ListSelector";
@@ -34,10 +34,6 @@ const platforms = [
 function PostGame() {
   const [game, setGame] = useState(GAME_TEMPLATE);
   const [gameDataFullfilled, setGameDataFullfilled] = useState(false);
-  const [validationError, setValidationError] = useState({
-    errorMsg: "Mandatory fields missing",
-    readyToPost: false,
-  });
   const dbGenres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
   let readyToPost = false;
@@ -64,22 +60,20 @@ function PostGame() {
         requirementChecker++;
     }
     if (requirementChecker === 0) {
-      setValidationError({
-        ...validationError,
-        readyToPost: true,
-      });
       readyToPost = true;
     }
     if (readyToPost === true) {
       dispatch(postGame(game));
       dispatch(getGames());
+      dispatch(getGenres());
       setGame({
         ...game,
         redirect: true,
       });
       setGameDataFullfilled(true);
+      readyToPost = false;
     } else {
-      alert(validationError.errorMsg);
+      alert("All fields must be completed");
     }
   };
 
@@ -101,9 +95,7 @@ function PostGame() {
               value={game.name}
               onChange={handleOnChange}
             />
-            <label>
-              Title <p>{validationError.name}</p>
-            </label>
+            <label>Title</label>
           </div>
           <div className="text-box">
             <textarea
@@ -172,64 +164,3 @@ function PostGame() {
 }
 
 export default PostGame;
-
-/*
-<h3>Post Your Own Game!</h3>
-      <form onSubmit={handleOnSubmit}>
-        <label>Name</label>
-        <input name="name" value={game.name} onChange={handleOnChange} />
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={game.description}
-          onChange={handleOnChange}
-        />
-        <label>Release Date</label>
-        <input
-          name="release_date"
-          value={game.release_date}
-          onChange={handleOnChange}
-        />
-        <label>Rating</label>
-        <input name="rating" value={game.rating} onChange={handleOnChange} />
-        <label>Background Image</label>
-        <input
-          name="background_img"
-          value={game.background_img}
-          onChange={handleOnChange}
-        />
-        <>
-          <ListSelector
-            itemToSelect="platforms"
-            itemsList={platforms}
-            selectorHandler={handleOnChange}
-          />
-          {game.platforms.map((platform, index) => (
-            <li key={index}>{platform}</li>
-          ))}
-        </>
-        <>
-          <ListSelector
-            itemToSelect="genres"
-            itemsList={dbGenres}
-            selectorHandler={handleOnChange}
-          />
-          {game.genres.map((genre, index) => (
-            <li key={index}>{genre}</li>
-          ))}
-        </>
-        <button type="submit">Add Game</button>
-      </form>
-*/
-
-/*
-<input
-          name="platforms"
-          value={game.platforms}
-          onChange={handleOnChange}
-        />
-
-
-        <input name="genres" value={game.genres} onChange={handleOnChange} />
-
-*/

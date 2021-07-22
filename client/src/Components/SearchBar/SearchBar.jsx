@@ -49,20 +49,3 @@ function SearchBar(props) {
 }
 
 export default SearchBar;
-
-// export default function SearchBar({searchFunction}){
-
-//   const [city,setCity] = useState([]);
-
-//   const onButtonClick = (e)=>{
-//     e.preventDefault();
-//     searchFunction(city);
-//   }
-
-//   return(
-//         <div className={styles.searchBar}>
-//           <input onEnter={onButtonClick} placeholder={"Enter a city..."} onChange={(e)=>{setCity(e.target.value)}} type={"text"}/>
-//           <button type={"submit"} onClick={onButtonClick}>Add</button>
-//         </div>
-//   )
-//  }

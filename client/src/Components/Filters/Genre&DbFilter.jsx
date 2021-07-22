@@ -12,9 +12,7 @@ function GenreAndDbFilter() {
   const handleOnChange = (e) => {
     const clickedGenre = e.target.value;
     let newGenresToFilter = genresToFilter;
-    // genresToFilter.includes(clickedGenre)
-    //   ? newGenresToFilter.splice(newGenresToFilter.indexOf(clickedGenre), 1)
-    //   : newGenresToFilter.push(clickedGenre);
+
     if (genresToFilter.includes(clickedGenre)) {
       newGenresToFilter.splice(newGenresToFilter.indexOf(clickedGenre), 1);
     } else {
@@ -52,11 +50,3 @@ function GenreAndDbFilter() {
 }
 
 export default GenreAndDbFilter;
-
-/* <input
-                key={genre.id}
-                type="checkbox"
-                value={genre.name}
-                onChange={handleOnChange}
-              />
-              */

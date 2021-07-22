@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./About.css";
+
 function About() {
   return (
     <>
@@ -8,38 +10,53 @@ function About() {
           <button>back To Showcase</button>
         </div>
       </Link>
-      <div className="text-row">
+      <div className="text-column">
         <div className="profile">
           <h4>
-            Hi! I'm Julian Piñel, Full-Stack Web Developer and also a
+            My name is Julian, I am Full-Stack Web Developer and also a
             Electronics Engineering student.
           </h4>
-          <p>This is a Videogame Showcase App I made for Henry Bootcamp</p>
-          <p>For more information here is my</p>{" "}
-          <Link
-            className="react-link"
-            to="https://www.linkedin.com/in/julian-pi%C3%B1el/"
-          >
-            <p>LinkedIn Profile</p>
-          </Link>
+          <p>This is a Videogame Showcase App I made for Henry Bootcamp.</p>
+          <p>
+            For more information here is my{" "}
+            <a
+              className="react-link"
+              href="https://www.linkedin.com/in/julian-pi%C3%B1el/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                className="linkedin-img"
+                src="https://www.premiereactors.com/wp-content/uploads/2014/08/LinkedIn_logo_initials.png"
+                alt="linkedin"
+              />
+            </a>
+          </p>
         </div>
         <div className="tools">
-          <h4>
-            Here is a list of tools and frameworks used to develop this app:
-          </h4>
-          <p>Front-End</p>
+          <h4>Tools and frameworks used to develop this app:</h4>
+          <h5>Front-End</h5>
           <ul>
             <li>React JS and Redux</li>
-            <li>Styles made with pure CSS</li>
+            <li>Styles made with pure CSS.</li>
           </ul>
-          <p>Back-End</p>
+          <h5>Back-End</h5>
           <ul>
-            <li>Node JS and Express</li>
-            <li>Relational Database made with PostgreSQL and Sequelize</li>
-            <li>Tests run with mocha</li>
+            <li>Node JS and Express.</li>
+            <li>Relational Database made with PostgreSQL and Sequelize.</li>
+            <li>Tests run with mocha and enzyme.</li>
           </ul>
         </div>
-        <div className="api-description">
+      </div>
+    </>
+  );
+}
+
+export default About;
+
+/*
+<div className="api-description">
+          <h4>Description</h4>
           <p>
             This Videogame Showcase consumes an free api using axios library,
             processes videogame data on backend server and show, order or filter
@@ -48,9 +65,4 @@ function About() {
             future hotfixes will allow the user to add an image file.
           </p>
         </div>
-      </div>
-    </>
-  );
-}
-
-export default About;
+*/

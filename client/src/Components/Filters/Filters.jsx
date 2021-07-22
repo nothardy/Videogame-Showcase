@@ -13,7 +13,6 @@ function Filters() {
 
   const handleOnChange = (e) => {
     const typeOfFiltering = e.target.value;
-    //dispatch(noFilter());
     switch (typeOfFiltering) {
       case AZ:
         dispatch(alphabeticFilter(typeOfFiltering));
@@ -27,9 +26,6 @@ function Filters() {
       case LOWEST:
         dispatch(rankingFilter(typeOfFiltering));
         break;
-      //   case ALL:
-      //     dispatch(noFilter());
-      //     break;
       default:
         dispatch(noFilter());
         break;
