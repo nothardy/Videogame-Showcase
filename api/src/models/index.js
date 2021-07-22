@@ -6,8 +6,7 @@ const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env,
     `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
     { logging: false, native: false }
   ),
-  { UUID, STRING, ARRAY, INTEGER, DATEONLY, TEXT, BOOLEAN } =
-    Sequelize.DataTypes;
+  { UUID, STRING, ARRAY, INTEGER, TEXT, BOOLEAN } = Sequelize.DataTypes;
 
 const Game = db.define("game", {
   id: { type: UUID, allowNull: false, primaryKey: true },
