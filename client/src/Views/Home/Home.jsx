@@ -21,7 +21,7 @@ function Home() {
     <>
       <div className="big-container">
         <div className="title-and-button">
-          <h4 id="title">Wanna see games?</h4>
+          <h4 id="title">Wanna play games?</h4>
           <Link to="/catalog">
             <button className="start-button" onClick={handleOnClick}>
               <h4>{getData.buttonTitle}</h4>

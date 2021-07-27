@@ -16,7 +16,7 @@ import {
 
 configure({ adapter: new Adapter() });
 
-describe("App", () => {
+describe("TEST --->App", () => {
   let store;
   const middlewares = [];
   const mockStore = configureStore(middlewares);
@@ -25,8 +25,8 @@ describe("App", () => {
     store = mockStore([]);
   });
 
-  describe("El componente Nav debe renderizar en todas las rutas.", () => {
-    it('Debería renderizarse en la ruta "/"', () => {
+  describe("Nav component should render in any route.", () => {
+    it('Nav should render at "/"', () => {
       const wrapper = mount(
         <>
           <Provider store={store}>
@@ -38,7 +38,7 @@ describe("App", () => {
       );
       expect(wrapper.find(Nav)).toHaveLength(1);
     });
-    it("Debería renderizarse en cualquier otra ruta ", () => {
+    it("Should render in any other route ", () => {
       const wrapper = mount(
         <Provider store={store}>
           <MemoryRouter initialEntries={["/about"]}>
@@ -50,7 +50,7 @@ describe("App", () => {
     });
   });
 
-  it('El componente Home debe renderizar en la ruta / (Sólo en la ruta "/")', () => {
+  it('Home component should only render at "/" ', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={["/"]}>

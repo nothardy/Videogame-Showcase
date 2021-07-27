@@ -5,13 +5,12 @@
 
 .searchbar-input {
   background-color: black;
-  color: rgb(192, 12, 12);
+  color: goldenrod;
   font-family: "Poppins", sans-serif;
   border: solid 1px rgb(192, 12, 12);
 }
 
 .button {
-  padding-top: 3%;
   width: 100px;
   height: 40px;
   font-size: 1.1em;
@@ -27,9 +26,13 @@
   font-size: 15px;
 }
 
+.button:hover {
+  border: solid 1px rgb(192, 12, 12);
+  border-radius: 5px;
+}
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgb(192, 12, 12);
+  color: goldenrod;
   font-family: "Poppins", sans-serif;
   opacity: 1; /* Firefox */
 }

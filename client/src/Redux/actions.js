@@ -11,11 +11,12 @@ export const GET_GAMES = "GET_GAMES",
   RANKING_FILTER = "RATING_FILTER",
   NO_FILTER = "NO_FILTER",
   FILTER_BY_GENRE = "FILTER_BY_GENRE",
-  GET_FEW_GAMES = "GET_FEW_GAMES";
+  GET_FEW_GAMES = "GET_FEW_GAMES",
+  localhost = "192.168.1.36";
 
 export function getGames() {
   return (dispatch) => {
-    axios.get("http://localhost:3001/videogames").then((response) => {
+    axios.get(`http://${localhost}:3001/videogames/`).then((response) => {
       dispatch({ type: GET_GAMES, payload: response.data });
     });
   };
@@ -24,7 +25,7 @@ export function getGames() {
 export function getFewGames() {
   return (dispatch) => {
     axios
-      .get("http://localhost:3001/videogames/getFewGames")
+      .get(`http://${localhost}:3001/videogames/getFewGames`)
       .then((response) => {
         dispatch({ type: GET_FEW_GAMES, payload: response.data });
       });
@@ -34,7 +35,7 @@ export function getFewGames() {
 export function postGame(game) {
   return (dispatch) => {
     axios
-      .post("http://localhost:3001/videogames", game, {
+      .post(`http://${localhost}:3001/videogames`, game, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
@@ -46,7 +47,7 @@ export function postGame(game) {
 export function searchGameByName(game) {
   return (dispatch) => {
     axios
-      .get(`http://localhost:3001/videogames?name=${game}`)
+      .get(`http://${localhost}:3001/videogames/?name=${game}`)
       .then((response) => {
         dispatch({ type: SEARCH_GAME_BY_NAME, payload: response.data });
       });
@@ -55,7 +56,7 @@ export function searchGameByName(game) {
 
 export function getGenres() {
   return (dispatch) => {
-    axios.get("http://localhost:3001/genres").then((response) => {
+    axios.get(`http://${localhost}:3001/genres`).then((response) => {
       dispatch({ type: GET_GENRES, payload: response.data.genres });
     });
   };
@@ -76,7 +77,7 @@ export function removeGameDetails() {
 export function getGameDetails(gameId) {
   return (dispatch) => {
     axios
-      .get(`http://localhost:3001/videogames/searchById/${gameId}`)
+      .get(`http://${localhost}:3001/videogames/searchById/${gameId}`)
       .then((response) => {
         dispatch({ type: GET_GAME_DETAILS, payload: response.data });
       });

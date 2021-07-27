@@ -36,6 +36,8 @@ const gamesToFilterDeclaration = (state = initialState) => {
   return gamesToFilter;
 };
 
+//comentar que hace esta funcion
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_GAMES:

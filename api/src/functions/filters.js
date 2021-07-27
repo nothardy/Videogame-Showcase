@@ -1,6 +1,8 @@
 const { default: axios } = require("axios");
 const { Game, Genre } = require("../models/index");
 const { Op } = require("sequelize");
+require("dotenv").config();
+const { API_KEY } = process.env;
 
 const filterGameDetails = (fetchedGames) => {
   return (fetchedGames = fetchedGames.map((game) => {
@@ -109,6 +111,24 @@ const get100Games = async (api, manyGames = false) => {
 
   allGames = filterGameDetails(allGames);
   return allGames;
+
+  // let newPages = [1, 2, 3, 4, 5];
+  // let promises = newPages.map((page) => {
+  //   return axios.get(
+  //     `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`
+  //   );
+  // });
+
+  // let resolvedPromises = await Promise.all(promises);
+  // let allGames = [];
+
+  // resolvedPromises = resolvedPromises
+  //   .map((promisePage) => filterGameDetails(promisePage.data.results))
+  //   .forEach(
+  //     (resolvedPromise) => (allGames = [...allGames, ...resolvedPromise])
+  //   );
+
+  // return allGames;
 };
 
 module.exports = {
@@ -118,3 +138,23 @@ module.exports = {
   specificGameDetails,
   getDbGames,
 };
+
+// const get100Games = async (api, manyGames = false) => {
+//   const dataPage1 = api.data;
+//   let allGames = dataPage1.results;
+//   let pages = dataPage1;
+//   let i = 0;
+//   // fetcheo cada pagina de resultados, hago hasta 6 (( 100 juegos)) pero podrian ser infinitos.
+//   while (i < 6 && !pages.next.endsWith(6) && manyGames == false) {
+//     // && !pages.next.endsWith(6)
+//     let getMoreFromApi = await axios.get(pages.next);
+
+//     allGames = [...allGames, ...getMoreFromApi.data.results];
+
+//     pages = getMoreFromApi.data;
+//     i++;
+//   }
+
+//   allGames = filterGameDetails(allGames);
+//   return allGames;
+// };
