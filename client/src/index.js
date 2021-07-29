@@ -25,3 +25,14 @@ ReactDOM.render(
 );
 
 reportWebVitals();
+
+/*
+
+index things 
+
+<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
+*/
