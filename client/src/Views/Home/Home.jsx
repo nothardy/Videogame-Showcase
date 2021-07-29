@@ -28,11 +28,7 @@ function Home() {
             </button>
           </Link>
         </div>
-        <img
-          className="img"
-          src="https://images4.alphacoders.com/667/thumb-1920-667676.png"
-          alt="Missing"
-        />
+        <img className="img" src="./witcher.png" alt="Missing" />
       </div>
     </>
   );
