@@ -60,6 +60,7 @@
 }
 
 .img {
+  display: block;
   border-radius: 10px;
   height: 60%;
   width: 50%;
