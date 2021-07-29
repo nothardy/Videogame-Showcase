@@ -20,7 +20,7 @@
 const server = require("./src/app.js");
 const { db } = require("./src/models");
 // Syncing all the models at once.
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log("deployed"); // eslint-disable-line no-console
   });
