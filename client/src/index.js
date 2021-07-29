@@ -17,7 +17,7 @@ axios.defaults.baseURL =
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/React">
       <App />
     </BrowserRouter>
   </Provider>,
