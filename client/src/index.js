@@ -7,8 +7,13 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import { createBrowserHistory } from "history";
-
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 export const browserHistory = createBrowserHistory();
+
+axios.defaults.baseURL =
+  process.env.REACT_APP_BACKEND || "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store}>

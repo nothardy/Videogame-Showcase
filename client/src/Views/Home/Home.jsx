@@ -30,7 +30,7 @@ function Home() {
         </div>
         <img
           className="img"
-          src="https://areajugones.sport.es/wp-content/uploads/2019/02/The-Witcher-Sapkowski.jpeg"
+          src="https://images4.alphacoders.com/667/thumb-1920-667676.png"
           alt="Missing"
         />
       </div>
