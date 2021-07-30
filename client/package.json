@@ -39,7 +39,7 @@
       "react-app/jest"
     ]
   },
-  "homepage": "/build",
+  "homepage": "https://videogame-showcase.vercel.app/",
   "browserslist": {
     "production": [
       ">0.2%",
