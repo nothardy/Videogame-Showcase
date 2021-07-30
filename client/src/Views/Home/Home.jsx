@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import witcherImg from "./witcher.png";
+import witcherImg from "./witcher.jpg";
 
 function Home() {
   const [getData, setGetData] = useState({
