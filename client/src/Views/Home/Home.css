@@ -62,10 +62,11 @@
 .img {
   display: block;
   border-radius: 10px;
-  height: 60%;
-  width: 50%;
-  border: none;
-  opacity: 90%;
+  height: 13rem;
+  width: 15rem;
+  margin: 0.5 rem;
+
+  border-radius: 5px;
 }
 
 .title-and-button {
@@ -83,4 +84,12 @@
   letter-spacing: 5px;
   font-size: 40px;
 }
-/* text-transform: uppercase; */
+/* text-transform: uppercase;
+
+
+display: block;
+  border-radius: 10px;
+  height: 60%;
+  width: 50%;
+  border: none;
+  opacity: 90%;*/
