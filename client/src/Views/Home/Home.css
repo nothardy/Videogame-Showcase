@@ -62,11 +62,9 @@
 .img {
   display: block;
   border-radius: 10px;
-  height: 13rem;
-  width: 15rem;
+  height: 20rem;
+  width: 25rem;
   margin: 0.5 rem;
-
-  border-radius: 5px;
 }
 
 .title-and-button {
