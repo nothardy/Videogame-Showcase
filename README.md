@@ -21,4 +21,4 @@ Front-End has 5 different routes: Home, About, Catalog, Post and Details:
 - Catalog shows up to 10 games per page, with ordering buttons and filters and a search bar if you are looking for any specific game. Clicking each game with redirect to the Game Detail route.
 - Post is a route where users can add their own game to the catalog, which is stored inside the database.
 
-You can take a look at this page <a href="deployed-link" target="_blank" rel="noreferrer">here</a>
+You can take a look at this page <a href="https://videogame-showcase.vercel.app" target="_blank" rel="noreferrer">here</a>
