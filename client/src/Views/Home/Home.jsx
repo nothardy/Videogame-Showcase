@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import witcherImg from "./witcher.png";
 
 function Home() {
   const [getData, setGetData] = useState({
@@ -28,11 +29,7 @@ function Home() {
             </button>
           </Link>
         </div>
-        <img
-          className="img"
-          src="https://images4.alphacoders.com/667/thumb-1920-667676.png"
-          alt="Missing"
-        />
+        <img className="img" src={witcherImg} alt="Missing" />
       </div>
     </>
   );

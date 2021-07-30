@@ -1,11 +1,11 @@
 .page-numbers {
+  margin-top: 1%;
   display: flex;
   justify-content: center;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   letter-spacing: 5px;
   list-style: none;
-  display: flex;
 }
 .game-box:hover {
   transform: translateY(-2px);
